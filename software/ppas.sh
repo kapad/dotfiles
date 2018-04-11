@@ -4,11 +4,14 @@
 ### ADD PPAs ###
 ################
 sudo apt-get update
-sudo apt-get install -y apt-transport-https
+sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 
 sudo add-apt-repository -y ppa:webupd8team/atom
 
 sudo add-apt-repository -y ppa:webupd8team/brackets
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
 sudo add-apt-repository -y ppa:git-core/ppa
 
@@ -27,6 +30,8 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 
 sudo apt-get update
 
+sudo apt-get remove -y docker docker-engine docker.io
+
 #########################
 ### INSTALL FROM PPAs ###
 #########################
@@ -34,7 +39,12 @@ sudo apt-get update
 sudo apt-get install -y \
 												atom \
 												brackets \
-												git \
+												clipit \
+												docker-ce \
+												git git-cola \
 												keepassxc \
+												nixnote2 \
 												oracle-java8-installer oracle-java8-set-default \
-												sublime-text
+												sublime-text \
+												terminator \
+												vim
