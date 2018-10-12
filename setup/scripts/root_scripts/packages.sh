@@ -27,9 +27,7 @@ apt-get install -y \
     flatpak \
     gconf-editor \
     gimp \
-    git \
-    git-gui \
-    gitk \
+    git git-gui gitk git-cola \
     gnome-software-plugin-flatpak \
     gnome-tweak-tool \
     graphviz graphviz-doc \
