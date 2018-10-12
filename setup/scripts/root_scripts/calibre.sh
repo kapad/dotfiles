@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. lib.sh
+. ../lib.sh
 
 as_root "$0" "$@"
 
