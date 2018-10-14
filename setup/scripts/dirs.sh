@@ -15,3 +15,7 @@ fi
 if [[ ! -d $HOME/Applications ]]; then
     mkdir $HOME/Applications
 fi
+
+if [[ ! -d $HOME/tmp ]]; then
+    mkdir $HOME/tmp
+fi

@@ -18,7 +18,7 @@ echo "deb https://download.virtualbox.org/virtualbox/debian $(lsb_release -c -s)
 
 apt-get update
 apt-get install -y \
-    apt-rdepends
+    apt-rdepends \
     apt-transport-https \
     build-essential \
     caffeine \

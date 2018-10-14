@@ -21,6 +21,8 @@ gsettings set org.gnome.desktop.interface document-font-name "Ubuntu 11"
 gsettings set org.gnome.desktop.interface monospace-font-name "Ubuntu Mono 12"
 gsettings set org.gnome.desktop.interface show-battery-percentage "true"
 
+gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,maximize:"
+
 gsettings set org.gnome.shell.extensions.lockkeys style "both"
 gsettings set org.gnome.shell.extensions.lockkeys notifications "false"
 
