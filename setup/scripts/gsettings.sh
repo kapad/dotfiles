@@ -5,8 +5,7 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "nothing"
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout "900"
 
-# gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'in+eng')]"
-# gsettings set org.gnome.desktop.input-sources mru-sources "[('xkb', 'us'), ('xkb', 'in+eng')]"
+gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'in+eng')]"
 
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled "true"
 
@@ -29,8 +28,6 @@ gsettings set org.gnome.shell.extensions.lockkeys notifications "false"
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position="LEFT"
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size "32"
 
-# gsettings set org.gnome.shell.extensions.caffeine user-enabled "true"
-
 gsettings set org.gnome.shell.extensions.donotdisturb-button override "false"
 gsettings set org.gnome.shell.extensions.donotdisturb-button panel-icon-center "true"
 gsettings set org.gnome.shell.extensions.donotdisturb-button panel-count-show "true"
@@ -52,3 +49,53 @@ gsettings set org.gnome.gedit.preferences.editor wrap-last-split-mode "word"
 gsettings set org.gnome.gedit.preferences.editor auto-indent "true"
 gsettings set org.gnome.gedit.preferences.ui show-tabs-mode "auto"
 
+gsettings set org.gnome.desktop.privacy remove-old-temp-files "true"
+gsettings set org.gnome.desktop.privacy remove-old-trash-files "true"
+
+gsettings set org.gnome.desktop.a11y always-show-universal-access-status "true"
+
+#shortcuts
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenreader ""
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot ""
+gsettings set org.gnome.settings-daemon.plugins.media-keys logout ""
+gsettings set org.gnome.settings-daemon.plugins.media-keys terminal ""
+gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot ""
+gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot ""
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys magnifier ""
+
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom0 binding "<Alt>Print"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom0 command "shutter -w"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom0 name "Take a screenshot of a window with shutter"
+
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom1 binding "<Shift>Print"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom1 command "shutter -s"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom1 name "Take a screenshot of an area with shutter"
+
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom2 binding "Print"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom2 command "shutter -f"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom2 name "Take a screenshot with shutter"
+
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom3 binding "<Super>t"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom3 command "terminator"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom3 name "Launch Terminator"
+
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom4 binding "<Primary><Alt>t"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom4 command "terminator"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom4 name "Launch Terminator"
+
+
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-up "['<Super><Shift>Page_Up']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "@as []"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Super>Page_Down']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right "@as []"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "@as []"
+gsettings set org.gnome.desktop.wm.keybindings maximize-vertically "['<Shift><Super>v']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left "@as []"
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-down "@as []"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left "@as []"
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right "@as []"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-down "['<Super><Shift>Page_Down']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-up "@as []"
+gsettings set org.gnome.desktop.wm.keybindings maximize-horizontally "['<Shift><Super>h']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['<Super>Page_Up']"
