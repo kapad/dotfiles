@@ -1,7 +1,7 @@
 #!/bin/bash
 
-. ../lib.sh
-
+BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
+. $BASE_DIR/../lib.sh
 as_root "$0" "$@"
 
 apt-get install -y apt-transport-https

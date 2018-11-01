@@ -1,7 +1,8 @@
 #!/bin/bash
 
-. ../lib.sh
 
+BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
+. $BASE_DIR/../lib.sh
 as_root "$0" "$@"
 
 # upgrade app packages presently installed just as a preventive measure to 
@@ -16,38 +17,48 @@ wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- \
 echo "deb https://download.virtualbox.org/virtualbox/debian $(lsb_release -c -s) contrib" \
     > /etc/apt/sources.list.d/virtualbox.list
 
+pkg_list=( 
+    apt-rdepends
+    apt-transport-https
+    build-essential
+    caffeine
+    curl
+    dconf-editor
+    flatpak
+    gconf-editor
+    gimp
+    git git-gui gitk git-cola
+    gnome-software-plugin-flatpak
+    gnome-tweak-tool
+    graphviz graphviz-doc
+    hexchat
+    imagemagick
+    jq
+    meld
+    openjdk-11-jdk
+    openssh-server
+    pdfshuffler
+    python-gpg
+    shutter
+    steam
+    synaptic
+    terminator
+    ubuntu-restricted-addons
+    ubuntu-restricted-extras
+    ufw gufw
+    unison unison-gtk
+    vim
+    virtualbox-5.2
+    vlc browser-plugin-vlc
+    xsane
+    # required to compile the pop gtk theme from source.
+    libtool pkg-config sassc optipng parallel libglib2.0-dev libgdk-pixbuf2.0-dev librsvg2-dev libxml2-utils
+)
+
 apt-get update
-apt-get install -y \
-    apt-rdepends \
-    apt-transport-https \
-    build-essential \
-    caffeine \
-    curl \
-    dconf-editor \
-    flatpak \
-    gconf-editor \
-    gimp \
-    git git-gui gitk git-cola \
-    gnome-software-plugin-flatpak \
-    gnome-tweak-tool \
-    graphviz graphviz-doc \
-    hexchat \
-    imagemagick \
-    jq \
-    meld \
-    openjdk-11-jdk \
-    openssh-server \
-    pdfshuffler \
-    python-gpg \
-    shutter \
-    steam \
-    synaptic \
-    terminator \
-    ubuntu-restricted-addons \
-    ubuntu-restricted-extras \
-    ufw gufw \
-    unison unison-gtk \
-    vim \
-    virtualbox-5.2 \
-    vlc browser-plugin-vlc \
-    xsane \
+
+# accepting the mscorefonts installer license so that the installation script doesn't stop for user input.
+echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
+
+apt-get install -y "${pkg_list[@]}"
+    

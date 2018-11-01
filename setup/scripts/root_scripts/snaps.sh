@@ -1,11 +1,17 @@
 #!/bin/bash
 
-. ../lib.sh
-
+BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
+. $BASE_DIR/../lib.sh
 as_root "$0" "$@"
 
+# multiple classic snaps cannot be installed in a single command. 
 snap install --classic skype
 snap install --classic sublime-text
 snap install --classic vscode
 snap install --classic atom
-snap install pdftk
+
+snaps_list=(
+    pdftk
+    inkscape # required to compile the pop theme from source.
+)
+snap install "${snaps_list[@]}"
