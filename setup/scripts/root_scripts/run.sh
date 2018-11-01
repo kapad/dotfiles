@@ -1,9 +1,9 @@
 #!/bin/bash
 
-. ../lib.sh
+# . ../lib.sh
 
-as_root "$0" "$@"
+# as_root "$0" "$@"
 
-./packages.sh
-./snaps.sh
-./calibre.sh
+# ./packages.sh
+# ./snaps.sh
+# ./calibre.sh

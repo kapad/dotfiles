@@ -1,9 +1,7 @@
 #!/bin/bash
 
-. ../lib.sh
-
-as_root "$0" "$@"
-
-add-apt-repository -y ppa:dyatlov-igor/materia-theme
-apt-get update
-apt-get install -y materia-gtk-theme
+wget -O $HOME/tmp/materia.zip "https://github.com/nana-4/materia-theme/archive/master.zip"
+unzip $HOME/tmp/materia.zip -d $HOME/tmp/
+rm $HOME/tmp/materia.zip
+$HOME/tmp/materia-theme-master/install.sh --dest $HOME/.local/share/themes
+rm -rf $HOME/tmp/materia-theme-master

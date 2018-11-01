@@ -50,4 +50,4 @@ apt-get install -y \
     vim \
     virtualbox-5.2 \
     vlc browser-plugin-vlc \
-    xsane
+    xsane \
