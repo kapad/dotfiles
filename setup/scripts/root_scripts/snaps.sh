@@ -12,6 +12,7 @@ snap install --classic atom
 
 snaps_list=(
     pdftk
+    chromium # prefer using to google chrome which tracks the shit out of you.
     inkscape # required to compile the pop theme from source.
 )
 snap install "${snaps_list[@]}"
