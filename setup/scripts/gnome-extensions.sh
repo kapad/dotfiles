@@ -11,5 +11,5 @@ $HOME/.local/bin/gnome-shell-extension-installer --yes 1276 # night light slider
 $HOME/.local/bin/gnome-shell-extension-installer --yes 826 # suspend button
 
 # quick fix because the gnome shell extension installer doesn't properly activate/deactivate the user themes extension.
-EXTENSIONS=$(gsettings get org.gnome.shell enabled-extensions | sed -e 's/user-themes\?/user-theme@gnome-shell-extensions.gcampax.github.com/g')
-gsettings set org.gnome.shell enabled-extensions $EXTENSIONS
+# EXTENSIONS=$(gsettings get org.gnome.shell enabled-extensions | sed -e 's/user-themes\?/user-theme@gnome-shell-extensions.gcampax.github.com/g')
+# gsettings set org.gnome.shell enabled-extensions "$EXTENSIONS"
