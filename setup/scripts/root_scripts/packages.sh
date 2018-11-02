@@ -11,6 +11,9 @@ as_root "$0" "$@"
 apt-get update
 apt-get -y upgrade
 
+#######
+# Apt #
+#######
 apt-add-repository -y ppa:git-core/ppa
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- \
     | apt-key add -
@@ -61,4 +64,20 @@ apt-get update
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
 
 apt-get install -y "${pkg_list[@]}"
+
+#########
+# Snaps #
+#########
+# multiple classic snaps cannot be installed in a single command. 
+snap install --classic skype
+snap install --classic sublime-text
+snap install --classic vscode
+snap install --classic atom
+
+snaps_list=(
+    pdftk
+    chromium # prefer using to google chrome which tracks the shit out of you.
+    inkscape # required to compile the pop theme from source.
+)
+snap install "${snaps_list[@]}"
     
