@@ -25,7 +25,7 @@ gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,max
 gsettings set org.gnome.shell.extensions.lockkeys style "both"
 gsettings set org.gnome.shell.extensions.lockkeys notifications "false"
 
-gsettings set org.gnome.shell.extensions.dash-to-dock dock-position="LEFT"
+gsettings set org.gnome.shell.extensions.dash-to-dock dock-position "LEFT"
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size "32"
 
 gsettings set org.gnome.shell.extensions.donotdisturb-button override "false"
@@ -61,28 +61,28 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys logout ""
 gsettings set org.gnome.settings-daemon.plugins.media-keys terminal ""
 gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot ""
 gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot ""
-gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys magnifier ""
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']"
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom0 binding "<Alt>Print"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom0 command "shutter -w"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom0 name "Take a screenshot of a window with shutter"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Alt>Print"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "shutter -w"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Take a screenshot of a window with shutter"
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom1 binding "<Shift>Print"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom1 command "shutter -s"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom1 name "Take a screenshot of an area with shutter"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding "<Shift>Print"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command "shutter -s"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name "Take a screenshot of an area with shutter"
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom2 binding "Print"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom2 command "shutter -f"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom2 name "Take a screenshot with shutter"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding "Print"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ command "shutter -f"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ name "Take a screenshot with shutter"
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom3 binding "<Super>t"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom3 command "terminator"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom3 name "Launch Terminator"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ binding "<Super>t"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ command "terminator"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/ name "Launch Terminator"
 
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom4 binding "<Primary><Alt>t"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom4 command "terminator"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybindings.custom4 name "Launch Terminator"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ binding "<Primary><Alt>t"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ command "terminator"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name "Launch Terminator"
 
 
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-up "['<Super><Shift>Page_Up']"
