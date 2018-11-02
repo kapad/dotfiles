@@ -12,7 +12,7 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled "true"
 gsettings set org.gnome.desktop.interface gtk-theme "Ant"
 gsettings set org.gnome.desktop.interface cursor-theme "Pop"
 gsettings set org.gnome.desktop.interface icon-theme "Paper"
-gsettings set org.gnome.shell.extensions.user-theme name "Materia-dark-compact"
+gsettings --schemadir $HOME/.local/share/gnome-shell/extensions/user-theme@gnome-shell-extensions.gcampax.github.com/schemas set org.gnome.shell.extensions.user-theme name "Materia-dark-compact"
 
 gsettings set org.gnome.desktop.interface clock-format "12h"
 gsettings set org.gnome.desktop.interface clock-show-date "true"
@@ -22,19 +22,19 @@ gsettings set org.gnome.desktop.interface show-battery-percentage "true"
 
 gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,maximize:"
 
-gsettings set org.gnome.shell.extensions.lockkeys style "both"
-gsettings set org.gnome.shell.extensions.lockkeys notifications "false"
+gsettings --schemadir $HOME/.local/share/gnome-shell/extensions/lockkeys@vaina.lt/schemas set org.gnome.shell.extensions.lockkeys style "both"
+gsettings --schemadir $HOME/.local/share/gnome-shell/extensions/lockkeys@vaina.lt/schemas set org.gnome.shell.extensions.lockkeys notifications "false"
 
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position "LEFT"
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size "32"
 
-gsettings set org.gnome.shell.extensions.donotdisturb-button override "false"
-gsettings set org.gnome.shell.extensions.donotdisturb-button panel-icon-center "true"
-gsettings set org.gnome.shell.extensions.donotdisturb-button panel-count-show "true"
-gsettings set org.gnome.shell.extensions.donotdisturb-button busy-state "false"
-gsettings set org.gnome.shell.extensions.donotdisturb-button overrride-busy-state "false"
+gsettings --schemadir $HOME/.local/share/gnome-shell/extensions/donotdisturb-button@nls1729/schemas set org.gnome.shell.extensions.donotdisturb-button override "false"
+gsettings --schemadir $HOME/.local/share/gnome-shell/extensions/donotdisturb-button@nls1729/schemas set org.gnome.shell.extensions.donotdisturb-button panel-icon-center "true"
+gsettings --schemadir $HOME/.local/share/gnome-shell/extensions/donotdisturb-button@nls1729/schemas set org.gnome.shell.extensions.donotdisturb-button panel-count-show "true"
+gsettings --schemadir $HOME/.local/share/gnome-shell/extensions/donotdisturb-button@nls1729/schemas set org.gnome.shell.extensions.donotdisturb-button busy-state "false"
+gsettings --schemadir $HOME/.local/share/gnome-shell/extensions/donotdisturb-button@nls1729/schemas set org.gnome.shell.extensions.donotdisturb-button overrride-busy-state "false"
 
-gsettings set org.gnome.shell.extensions.nightlightslider show-always "true"
+gsettings --schemadir $HOME/.local/share/gnome-shell/extensions/night-light-slider.timur@linux.com/schemas set org.gnome.shell.extensions.nightlightslider show-always "true"
 
 gsettings set org.gnome.gedit.preferences.editor highlight-current-line "true"
 gsettings set org.gnome.gedit.preferences.editor display-right-margin "true"
