@@ -10,7 +10,7 @@ gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', '
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled "true"
 
 gsettings set org.gnome.desktop.interface gtk-theme "Ant"
-gsettings set org.gnome.desktop.interface cursor-theme "Pop"
+gsettings set org.gnome.desktop.interface cursor-theme "Paper"
 gsettings set org.gnome.desktop.interface icon-theme "Paper"
 gsettings --schemadir $HOME/.local/share/gnome-shell/extensions/user-theme@gnome-shell-extensions.gcampax.github.com/schemas set org.gnome.shell.extensions.user-theme name "Materia-dark-compact"
 

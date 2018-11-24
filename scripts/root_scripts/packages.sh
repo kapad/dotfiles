@@ -25,6 +25,8 @@ pkg_list=(
     apt-transport-https
     build-essential
     caffeine
+    chkrootkit
+    clipit
     curl
     dconf-editor
     flatpak
@@ -37,11 +39,15 @@ pkg_list=(
     hexchat
     imagemagick
     jq
+    lynis
     meld
     openjdk-11-jdk
     openssh-server
     pdfshuffler
     python-gpg
+    python-pip
+    python3-pip
+    secure-delete
     shutter
     steam
     synaptic
@@ -53,12 +59,11 @@ pkg_list=(
     vim
     virtualbox-5.2
     vlc browser-plugin-vlc
+    xclip
     xsane
     # required to compile the pop gtk theme from source.
     libtool pkg-config sassc optipng parallel libglib2.0-dev libgdk-pixbuf2.0-dev librsvg2-dev libxml2-utils
 )
-# add xclip clip-it? secure-delete
-# pip python
 
 apt-get update
 
