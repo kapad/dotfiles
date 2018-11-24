@@ -57,6 +57,8 @@ pkg_list=(
     # required to compile the pop gtk theme from source.
     libtool pkg-config sassc optipng parallel libglib2.0-dev libgdk-pixbuf2.0-dev librsvg2-dev libxml2-utils
 )
+# add xclip clip-it? secure-delete
+# pip python
 
 apt-get update
 
