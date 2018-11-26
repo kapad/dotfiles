@@ -15,16 +15,13 @@ apt-get -y upgrade
 # Apt #
 #######
 apt-add-repository -y ppa:git-core/ppa
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- \
-    | apt-key add -
-echo "deb https://download.virtualbox.org/virtualbox/debian $(lsb_release -c -s) contrib" \
-    > /etc/apt/sources.list.d/virtualbox.list
 
 pkg_list=( 
     apt-rdepends
     apt-transport-https
     build-essential
     caffeine
+    ca-certificates
     chkrootkit
     clipit
     curl
@@ -49,6 +46,7 @@ pkg_list=(
     python3-pip
     secure-delete
     shutter
+    software-properties-common
     steam
     synaptic
     terminator
@@ -57,12 +55,9 @@ pkg_list=(
     ufw gufw
     unison unison-gtk
     vim
-    virtualbox-5.2
     vlc browser-plugin-vlc
     xclip
     xsane
-    # required to compile the pop gtk theme from source.
-    libtool pkg-config sassc optipng parallel libglib2.0-dev libgdk-pixbuf2.0-dev librsvg2-dev libxml2-utils
 )
 
 apt-get update
@@ -71,6 +66,33 @@ apt-get update
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
 
 apt-get install -y "${pkg_list[@]}"
+
+# Additional repos and packages.
+################################
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- \
+    | apt-key add -
+echo "deb https://download.virtualbox.org/virtualbox/debian $(lsb_release -c -s) contrib" \
+    > /etc/apt/sources.list.d/virtualbox.list
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+add-apt-repository -y \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
+echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
+
+additional_pkg_list=(
+    docker-ce
+    sublime-merge
+    virtualbox-5.2
+)
+
+apt-get update
+
+apt-get install -y "${additional_pkg_list[@]}"
+
 
 #########
 # Snaps #
