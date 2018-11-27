@@ -13,12 +13,18 @@ root_scripts/dropbox.sh
 ./ruby.sh
 
 ./appimage.sh
+./boostnote.sh
+./cheat.sh
+./docker-compose.sh
+./eg.sh
 ./fasd.sh
 ./git-scripts.sh
 ./keepassxc.sh
+./mdv.sh
 ./nixnote.sh
 ./prompt.sh
 ./gnome-extensions.sh
+./tldr.sh
 
 ./docker-compose.sh
 
