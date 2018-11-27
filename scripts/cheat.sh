@@ -1,3 +1,3 @@
 #!/bin/bash
 
-# install cheat https://github.com/chrisallenlane/cheat/
+pip install --user cheat
