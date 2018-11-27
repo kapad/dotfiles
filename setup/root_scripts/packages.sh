@@ -113,4 +113,3 @@ snaps_list=(
     inkscape # required to compile the pop theme from source.
 )
 snap install "${snaps_list[@]}"
-    
