@@ -14,9 +14,8 @@ root_scripts/dropbox.sh
 
 ./appimage.sh
 ./boostnote.sh
-./cheat.sh
+./cli-doc-tools.sh
 ./docker-compose.sh
-./eg.sh
 ./fasd.sh
 ./git-scripts.sh
 ./keepassxc.sh
@@ -24,13 +23,11 @@ root_scripts/dropbox.sh
 ./nixnote.sh
 ./prompt.sh
 ./gnome-extensions.sh
-./tldr.sh
 
 ./docker-compose.sh
 
 themes/ant.sh
 themes/materia.sh
 themes/paper.sh
-themes/pop.sh
 
-./gsettings.sh
+# ./gsettings.sh
