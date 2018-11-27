@@ -1,5 +1,6 @@
 #!/bin/bash
 
-# install node via nodeenv (no root needed) 
-# download and setup the default node. 
-# install tldr. https://github.com/tldr-pages/tldr-node-client
+# use nvm for node. 
+# nvm already has it's own installation script. This script download url is tied to the 
+# current release version tag. Just see the readme, and copy paste the install line. 
+xdg-open "https://github.com/creationix/nvm#installation"

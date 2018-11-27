@@ -44,6 +44,7 @@ pkg_list=(
     python-gpg
     python-pip
     python3-pip
+    ruby-full
     secure-delete
     shutter
     software-properties-common
@@ -58,6 +59,8 @@ pkg_list=(
     vlc browser-plugin-vlc
     xclip
     xsane
+    # dependencies for downloading ruby via rubyenv
+    libssl-dev libreadline-dev
 )
 
 apt-get update
@@ -98,10 +101,11 @@ apt-get install -y "${additional_pkg_list[@]}"
 # Snaps #
 #########
 # multiple classic snaps cannot be installed in a single command. 
+snap install --classic atom
+snap install --classic node --channel=10 # using channel 10, which is currently the LTS release for node.
 snap install --classic skype
 snap install --classic sublime-text
 snap install --classic vscode
-snap install --classic atom
 
 snaps_list=(
     pdftk
