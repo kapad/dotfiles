@@ -102,6 +102,7 @@ apt-get install -y "${additional_pkg_list[@]}"
 #########
 # multiple classic snaps cannot be installed in a single command. 
 snap install --classic atom
+snap install --classic kubectl
 snap install --classic node --channel=10 # using channel 10, which is currently the LTS release for node.
 snap install --classic skype
 snap install --classic sublime-text
