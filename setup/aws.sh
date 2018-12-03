@@ -1,3 +1,3 @@
 #!/bin/bash
 
-pip install --user awscli aws-shell
+pip install --user awscli aws-shell awsprofile

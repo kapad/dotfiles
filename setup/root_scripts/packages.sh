@@ -14,7 +14,8 @@ apt-get -y upgrade
 #######
 # Apt #
 #######
-apt-add-repository -y ppa:git-core/ppa
+apt-add-repository --yes --no-update ppa:git-core/ppa
+add-apt-repository --yes --no-update ppa:pavreh/git-cola
 
 pkg_list=( 
     apt-rdepends
@@ -23,7 +24,10 @@ pkg_list=(
     caffeine
     ca-certificates
     chkrootkit
-    clipit
+    # clipit
+    # copyq - https://hluk.github.io/CopyQ/
+    # privacy concerns with clipboard managers. 
+    # are they compatible with keepassxc clearing the clipboard? 
     curl
     dconf-editor
     flatpak
