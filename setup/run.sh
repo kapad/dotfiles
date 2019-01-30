@@ -22,6 +22,7 @@ root_scripts/dropbox.sh
 ./mdv.sh
 ./nixnote.sh
 ./prompt.sh
+
 ./gnome-extensions.sh
 
 themes/ant.sh
