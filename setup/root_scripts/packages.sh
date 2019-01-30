@@ -24,6 +24,7 @@ pkg_list=(
     caffeine
     ca-certificates
     chkrootkit
+    chrome-gnome-shell
     # clipit
     # copyq - https://hluk.github.io/CopyQ/
     # privacy concerns with clipboard managers. 
@@ -65,6 +66,8 @@ pkg_list=(
     xsane
     # dependencies for downloading ruby via rubyenv
     libssl-dev libreadline-dev
+    # dependencies for dropbox
+    libpango1.0-0 libpangox-1.0-0
 )
 
 apt-get update

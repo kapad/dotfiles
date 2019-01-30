@@ -24,8 +24,6 @@ root_scripts/dropbox.sh
 ./prompt.sh
 ./gnome-extensions.sh
 
-./docker-compose.sh
-
 themes/ant.sh
 themes/materia.sh
 themes/paper.sh
