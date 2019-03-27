@@ -8,6 +8,7 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-tim
 gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'in+eng')]"
 
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled "true"
+gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature "3400"
 
 gsettings set org.gnome.desktop.interface gtk-theme "Ant"
 gsettings set org.gnome.desktop.interface cursor-theme "Paper"
@@ -27,6 +28,7 @@ gsettings --schemadir $HOME/.local/share/gnome-shell/extensions/lockkeys@vaina.l
 
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position "LEFT"
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size "32"
+gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces "true"
 
 gsettings --schemadir $HOME/.local/share/gnome-shell/extensions/donotdisturb-button@nls1729/schemas set org.gnome.shell.extensions.donotdisturb-button override "false"
 gsettings --schemadir $HOME/.local/share/gnome-shell/extensions/donotdisturb-button@nls1729/schemas set org.gnome.shell.extensions.donotdisturb-button panel-icon-center "true"
@@ -53,6 +55,8 @@ gsettings set org.gnome.desktop.privacy remove-old-temp-files "true"
 gsettings set org.gnome.desktop.privacy remove-old-trash-files "true"
 
 gsettings set org.gnome.desktop.a11y always-show-universal-access-status "true"
+
+gsettings set org.gnome.shell.app-switcher current-workspace-only "true"
 
 #shortcuts
 gsettings set org.gnome.settings-daemon.plugins.media-keys screenreader ""
@@ -85,6 +89,10 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/ name "Launch Terminator"
 
 
+gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Super>Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "['<Shift><Super>Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"
+gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Shift><Alt>Tab']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-up "['<Super><Shift>Page_Up']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "@as []"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Super>Page_Down']"
