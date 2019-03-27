@@ -32,6 +32,7 @@ pkg_list=(
     curl
     dconf-editor
     flatpak
+    gawk gawk-doc
     gconf-editor
     gimp
     git git-gui gitk git-cola
@@ -40,7 +41,9 @@ pkg_list=(
     graphviz graphviz-doc
     hexchat
     imagemagick
+    inxi
     jq
+    lm-sensors
     lynis
     meld
     openjdk-11-jdk
@@ -51,7 +54,7 @@ pkg_list=(
     python3-pip
     ruby-full
     secure-delete
-    shutter
+    shutter libappindicator-dev # work around for the missing shutter icon.
     software-properties-common
     steam
     synaptic
@@ -103,6 +106,9 @@ apt-get update
 
 apt-get install -y "${additional_pkg_list[@]}"
 
+# qt5 fix?
+apt-get --reinstall install libqt5dbus5 libqt5widgets5 libqt5network5 libqt5gui5 libqt5core5a libdouble-conversion1 libxcb-xinerama0
+
 
 #########
 # Snaps #
@@ -121,3 +127,7 @@ snaps_list=(
     inkscape # required to compile the pop theme from source.
 )
 snap install "${snaps_list[@]}"
+
+# work around for the missing shutter icon. 
+# http://tipsonubuntu.com/2018/05/25/re-enable-shutter-app-icon-ubuntu-18-04-system-tray/
+PERL_MM_USE_DEFAULT=1 cpan -i Gtk2::AppIndicator
