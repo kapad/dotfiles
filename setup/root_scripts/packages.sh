@@ -54,7 +54,7 @@ pkg_list=(
     python3-pip
     ruby-full
     secure-delete
-    shutter libappindicator-dev # work around for the missing shutter icon.
+    shutter libappindicator-dev # libappindicator-dev as work around for the missing shutter icon.
     software-properties-common
     steam
     synaptic
@@ -106,7 +106,9 @@ apt-get update
 
 apt-get install -y "${additional_pkg_list[@]}"
 
-# qt5 fix?
+# qt5 fix? 
+# some software that uses qt5 didn't work until the following packages were reinstalled. 
+# issue faced with: virtualbox, git-cola
 apt-get --reinstall install libqt5dbus5 libqt5widgets5 libqt5network5 libqt5gui5 libqt5core5a libdouble-conversion1 libxcb-xinerama0
 
 
