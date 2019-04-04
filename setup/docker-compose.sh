@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # docker compose has it's own installation script. 
-# The installation command, is version specific and there isn't any
-# straight forward way to automate this. 
+# It's possible to script this download using jq and the github releases API. 
 
 xdg-open "https://docs.docker.com/compose/install/#install-compose"
+xdg-open "https://docs.docker.com/compose/completion/"
