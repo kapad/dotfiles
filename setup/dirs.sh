@@ -1,29 +1,12 @@
 #!/bin/bash
 
-if [ ! -d $HOME/bin ]; then
-  mkdir $HOME/bin
-fi
+# Creates directories in the $HOME folder the way I like it setup. 
 
-if [ ! -d $HOME/.local/bin ]; then
-  mkdir -p $HOME/.local/bin
-fi
-
-if [[ ! -d $HOME/opt ]]; then
-    mkdir $HOME/opt
-fi
-
-if [[ ! -d $HOME/Applications ]]; then
-    mkdir $HOME/Applications
-fi
-
-if [[ ! -d $HOME/tmp ]]; then
-    mkdir $HOME/tmp
-fi
-
-if [[ ! -d $HOME/.local/share/themes ]]; then
-    mkdir $HOME/.local/share/themes
-fi
-
-if [[ ! -d $HOME/.local/share/icons ]]; then
-    mkdir $HOME/.local/share/icons
-fi
+mkdir -p $HOME/bin
+mkdir -p $HOME/.local/bin
+mkdir -p $HOME/opt
+mkdir -p $HOME/Applications
+mkdir -p $HOME/tmp
+mkdir -p $HOME/.local/share/themes
+mkdir -p $HOME/.local/share/icons
+mkdir -p .local/share/bash-completion/completions
