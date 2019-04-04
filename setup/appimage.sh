@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# AppImage Homepage: https://www.appimage.org/
+# AppImage: Linux apps that run anywhere
+# This script downloads and installs the AppImage daemon (appiamged) which is needed to run 
+# executable and self-contained AppImage apps. 
+# by default appimaged, monitors certain directories for executable appimages and automatically installs them.
+# Linus Torvalds on AppImage: "This is just very cool". And it is. :)
+
 wget -O $HOME/tmp/appimaged-x86_64.AppImage \
     "https://github.com/AppImage/appimaged/releases/download/continuous/appimaged-x86_64.AppImage"
 chmod a+x $HOME/tmp/appimaged-x86_64.AppImage
