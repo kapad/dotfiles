@@ -1,32 +1,35 @@
 #!/bin/bash
 
-./dirs.sh
+# ./dirs.sh
 
-root_scripts/change_swappiness.sh
-root_scripts/packages.sh
-root_scripts/calibre.sh
-root_scripts/google-chrome.sh
-root_scripts/dropbox.sh
+# root_scripts/change_swappiness.sh
+# root_scripts/packages.sh
+# root_scripts/calibre.sh
+# root_scripts/google-chrome.sh
+# root_scripts/dropbox.sh
 
-./node.sh
-./python.sh
-./ruby.sh
+# ./node.sh
+# ./python.sh
+# ./ruby.sh
 
-./appimage.sh
-./boostnote.sh
-./cli-doc-tools.sh
-./docker-compose.sh
-./fasd.sh
-./git-scripts.sh
-./keepassxc.sh
-./mdv.sh
-./nixnote.sh
-./prompt.sh
+# ./appimage.sh
+# ./boostnote.sh
+# ./cli-doc-tools.sh
+# ./docker-compose.sh
+# ./fasd.sh
+# ./git-scripts.sh
+# ./keepassxc.sh
+# ./mdv.sh
+# ./nixnote.sh
+# ./prompt.sh
 
-./gnome-extensions.sh
+# ./gnome-extensions.sh
 
-themes/ant.sh
-themes/materia.sh
-themes/paper.sh
+# themes/ant.sh
+# themes/materia.sh
+# themes/paper.sh
 
 # ./gsettings.sh
+
+# Move the above to a README. 
+# For now prefer manually installing as per the README instead of automating the entire installation. 
