@@ -1,9 +1,15 @@
 #!/bin/bash
 
+# $1 - the username that invoked this script before it was run as root.
 
 BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
 . $BASE_DIR/../lib.sh
-as_root "$0" "$@"
+# pass the current user when calling the script as root. 
+as_root "$0" "$USER"
+
+# this is the username of the user that initiated installtion. 
+# it is required to append to the groups that this user belongs to. 
+original_user=$1
 
 # upgrade app packages presently installed just as a preventive measure to 
 # any possible dependency issues. This may or may not really, help, but there
@@ -14,23 +20,49 @@ apt-get -y upgrade
 #######
 # Apt #
 #######
+
+# adding some ppas depends on the following packages already being installed. 
+pre_install_dependencies=(
+    apt-transport-https
+    ca-certificates
+    curl
+    gnupg-agent
+    software-properties-common
+    # dependencies for dropbox
+    libpango1.0-0 libpangox-1.0-0
+)
+apt-get install -y "${pre_install_dependencies[@]}"
+
+# git
 apt-add-repository --yes --no-update ppa:git-core/ppa
-add-apt-repository --yes --no-update ppa:pavreh/git-cola
+# git-cola
+apt-add-repository --yes --no-update ppa:pavreh/git-cola
+# openjdk - latest java
+apt-add-repository --yes --no-update ppa:openjdk-r/ppa
+# virtualbox
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- \
+    | apt-key add -
+echo "deb https://download.virtualbox.org/virtualbox/debian $(lsb_release -c -s) contrib" \
+    > /etc/apt/sources.list.d/virtualbox.list
+# docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+add-apt-repository -y \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+# sublime text and sublime merge
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
+echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
+
 
 pkg_list=( 
     apt-rdepends
-    apt-transport-https
     build-essential
     caffeine
-    ca-certificates
     chkrootkit
     chrome-gnome-shell
-    # clipit
-    # copyq - https://hluk.github.io/CopyQ/
-    # privacy concerns with clipboard managers. 
-    # are they compatible with keepassxc clearing the clipboard? 
-    curl
     dconf-editor
+    docker-ce docker-ce-cli containerd.io
     flatpak
     gawk gawk-doc
     gconf-editor
@@ -46,7 +78,14 @@ pkg_list=(
     lm-sensors
     lynis
     meld
+    mysql-client
+    mysql-server
     openjdk-11-jdk
+    openjdk-11-source
+    openjdk-11-doc
+    openjdk-8-jdk
+    openjdk-8-source
+    openjdk-8-doc
     openssh-server
     pdfshuffler
     python-gpg
@@ -55,8 +94,9 @@ pkg_list=(
     ruby-full
     secure-delete
     shutter libappindicator-dev # libappindicator-dev as work around for the missing shutter icon.
-    software-properties-common
     steam
+    sublime-merge
+    sublime-text
     synaptic
     terminator
     ubuntu-restricted-addons
@@ -64,15 +104,15 @@ pkg_list=(
     ufw gufw
     unison unison-gtk
     vim
+    virtualbox-5.2
     vlc browser-plugin-vlc
     xclip
     xsane
     # dependencies for downloading ruby via rubyenv
     libssl-dev libreadline-dev
-    # dependencies for dropbox
-    libpango1.0-0 libpangox-1.0-0
 )
 
+# update again because new repos have been added. 
 apt-get update
 
 # accepting the mscorefonts installer license so that the installation script doesn't stop for user input.
@@ -80,33 +120,13 @@ echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select tr
 
 apt-get install -y "${pkg_list[@]}"
 
-# Additional repos and packages.
-################################
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- \
-    | apt-key add -
-echo "deb https://download.virtualbox.org/virtualbox/debian $(lsb_release -c -s) contrib" \
-    > /etc/apt/sources.list.d/virtualbox.list
+# add the docker group if it doesn't exist. 
+[ $(getent group docker) ] || groupadd docker
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-add-apt-repository -y \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
+# if this isn't done, then only the root user will be able to use mysql and docker.
+usermod -a -G mysql,docker $original_user
 
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
-echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
-
-additional_pkg_list=(
-    docker-ce
-    sublime-merge
-    virtualbox-5.2
-)
-
-apt-get update
-
-apt-get install -y "${additional_pkg_list[@]}"
-
-# qt5 fix? 
+# qt5 fix? *unconfirmed*
 # some software that uses qt5 didn't work until the following packages were reinstalled. 
 # issue faced with: virtualbox, git-cola
 apt-get --reinstall install libqt5dbus5 libqt5widgets5 libqt5network5 libqt5gui5 libqt5core5a libdouble-conversion1 libxcb-xinerama0
@@ -116,17 +136,18 @@ apt-get --reinstall install libqt5dbus5 libqt5widgets5 libqt5network5 libqt5gui5
 # Snaps #
 #########
 # multiple classic snaps cannot be installed in a single command. 
+# i think classic snaps are pointless wrappers. might as well move what I can to ppas and apt. 
 snap install --classic atom
 snap install --classic kubectl
 snap install --classic node --channel=10 # using channel 10, which is currently the LTS release for node.
 snap install --classic skype
-snap install --classic sublime-text
 snap install --classic vscode
 
 snaps_list=(
     pdftk
     chromium # prefer using to google chrome which tracks the shit out of you.
     inkscape # required to compile the pop theme from source.
+    insomnia # API development/testing - similar to POSTMAN
 )
 snap install "${snaps_list[@]}"
 
