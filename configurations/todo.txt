@@ -1,0 +1,4 @@
+- shortcut icons on the left pane. 
+- some broken dropbox dependencies.
+- remove caffeine from autostart. 
+- add only caffeine indicator to autostart.
