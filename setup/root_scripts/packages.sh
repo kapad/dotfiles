@@ -141,7 +141,7 @@ snap install --classic atom
 snap install --classic kubectl
 snap install --classic node --channel=10 # using channel 10, which is currently the LTS release for node.
 snap install --classic skype
-snap install --classic vscode
+snap install --classic code
 
 snaps_list=(
     pdftk
