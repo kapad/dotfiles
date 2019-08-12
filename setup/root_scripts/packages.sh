@@ -98,6 +98,7 @@ pkg_list=(
     sublime-text
     synaptic
     terminator
+    tree
     ubuntu-restricted-addons
     ubuntu-restricted-extras
     ufw gufw
