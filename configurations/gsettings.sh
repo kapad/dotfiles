@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO: add music play, next, previous shortcuts. 
+
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action "nothing"
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout "3600"
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "nothing"
