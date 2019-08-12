@@ -99,8 +99,8 @@ pkg_list=(
     tree
     ubuntu-restricted-addons
     ubuntu-restricted-extras
-    ufw gufw
-    unison unison-gtk
+    ufw gufw # firewall utilities
+    unison unison-gtk # to backup the filesystem on an external hdd. 
     vim
     virtualbox-5.2
     vlc browser-plugin-vlc
