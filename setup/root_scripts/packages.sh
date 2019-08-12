@@ -94,7 +94,6 @@ pkg_list=(
     ruby-full
     secure-delete
     shutter libappindicator-dev # libappindicator-dev as work around for the missing shutter icon.
-    steam
     sublime-merge
     sublime-text
     synaptic
