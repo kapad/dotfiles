@@ -63,10 +63,8 @@ pkg_list=(
     chrome-gnome-shell
     dconf-editor
     docker-ce docker-ce-cli containerd.io
-    flatpak
     gawk gawk-doc
     gconf-editor
-    gimp
     git git-gui gitk git-cola
     gnome-software-plugin-flatpak
     gnome-tweak-tool
