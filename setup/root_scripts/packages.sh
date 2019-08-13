@@ -136,7 +136,7 @@ apt-get --reinstall install libqt5dbus5 libqt5widgets5 libqt5network5 libqt5gui5
 # multiple classic snaps cannot be installed in a single command. 
 # i think classic snaps are pointless wrappers. might as well move what I can to ppas and apt. 
 snap install --classic atom
-snap install --classic kubectl
+# snap install --classic kubectl
 snap install --classic skype
 snap install --classic code
 
