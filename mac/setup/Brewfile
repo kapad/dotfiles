@@ -6,6 +6,14 @@ brew "git-flow"
 brew "liquidprompt"
 brew "openssh"
 brew "openssl@1.1"
+# pyenv isn't working seamlessly. need to figure out the 
+# correct installation and the correct configs. 
+# brew "pyenv"
+# brew "pyenv-virtualenv"
+# pyenv-plugins
+# "readline" "xz" for pyenv
+# some other workaround for installing both python 2 and python 3. 
+
 
 cask "docker"
 cask "dropbox"
@@ -24,6 +32,19 @@ cask "virtualbox-extension-pack"
 cask "visual-studio-code"
 cask "vlc"
 cask "spotify"
+cask "slack"
+cask "evernote"
+cask "whatsapp"
 
 cask "pritunl"
 cask "tunnelblick"
+
+tap elastic/tap
+brew "elastic/tap/elastic-search-full"
+
+tap "adoptopenjdk/openjdk"
+cask "adoptopenjdk11"
+cask "adoptopenjdk9"
+cask "adoptopenjdk8"
+
+brew "jenv"
