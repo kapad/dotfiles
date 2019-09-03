@@ -6,6 +6,7 @@ brew "git-flow"
 brew "liquidprompt"
 brew "openssh"
 brew "openssl@1.1"
+brew "wget"
 # pyenv isn't working seamlessly. need to figure out the 
 # correct installation and the correct configs. 
 # brew "pyenv"
@@ -35,9 +36,12 @@ cask "spotify"
 cask "slack"
 cask "evernote"
 cask "whatsapp"
+cask "robo-3t"
+
 
 cask "pritunl"
 cask "tunnelblick"
+cask "authy"
 
 tap elastic/tap
 brew "elastic/tap/elastic-search-full"
