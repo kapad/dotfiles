@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# this script is written for my primary laptop. 
+# needs to be rewritten for a home server, because that is how I will use ubuntu now. 
+
 # utility function to change to root. 
 function as_root {
     if (($EUID != 0)); then
