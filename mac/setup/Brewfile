@@ -14,7 +14,9 @@ brew "wget"
 # pyenv-plugins
 # "readline" "xz" for pyenv
 # some other workaround for installing both python 2 and python 3. 
-
+brew "telnet"
+brew "python"
+brew "python@2"
 
 cask "docker"
 cask "dropbox"
@@ -37,6 +39,10 @@ cask "slack"
 cask "evernote"
 cask "whatsapp"
 cask "robo-3t"
+cask "mongodb-compass-community"
+cask "mongodb"
+cask "zoomus"
+cask "skype"
 
 
 cask "pritunl"
