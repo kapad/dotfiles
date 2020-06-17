@@ -16,15 +16,17 @@ brew "wget"
 # some other workaround for installing both python 2 and python 3. 
 brew "telnet"
 brew "python"
-brew "python@2"
+# brew "python@2" beyond EOL and removed by brew maintainers.
 
 cask "docker"
 cask "dropbox"
-cask "firefox"
-cask "github"
-cask "google-chrome"
+# cask "firefox" already installed
+# replacing the github git client with fork
+# cask "github"
+cask "fork"
+# cask "google-chrome" already installed
 cask "iterm2"
-cask "jetbrain-toolbox"
+cask "jetbrains-toolbox"
 cask "keepassxc"
 cask "postman"
 cask "spectacle"
@@ -35,26 +37,26 @@ cask "virtualbox-extension-pack"
 cask "visual-studio-code"
 cask "vlc"
 cask "spotify"
-cask "slack"
-cask "evernote"
+# cask "slack" already installed.
+# cask "evernote" I don't use evernote anymore.
 cask "whatsapp"
-cask "robo-3t"
-cask "mongodb-compass-community"
-cask "mongodb"
-cask "zoomus"
+# cask "robo-3t"
+# cask "mongodb-compass-community"
+# cask "mongodb"
+# cask "zoomus" already installed.
 cask "skype"
 
 
-cask "pritunl"
-cask "tunnelblick"
+# cask "pritunl"
+# cask "tunnelblick"
 cask "authy"
 
-tap elastic/tap
-brew "elastic/tap/elastic-search-full"
+#tap elastic/tap
+#brew "elastic/tap/elastic-search-full"
 
 tap "adoptopenjdk/openjdk"
 cask "adoptopenjdk11"
 cask "adoptopenjdk9"
 cask "adoptopenjdk8"
 
-brew "jenv"
+#brew "jenv"
