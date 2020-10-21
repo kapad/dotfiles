@@ -1,0 +1,18 @@
+[submodule "shell/plugins/zsh-syntax-highlighting"]
+	path = shell/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule "shell/plugins/fasd"]
+	path = shell/plugins/fasd
+	url = https://github.com/clvv/fasd
+[submodule "shell/plugins/fzf-tab"]
+	path = shell/plugins/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab
+[submodule "shell/plugins/zbrowse"]
+	path = shell/plugins/zbrowse
+	url = https://github.com/zdharma/zbrowse.git
+[submodule "shell/plugins/zconvey"]
+	path = shell/plugins/zconvey
+	url = https://github.com/zdharma/zconvey.git
+[submodule "shell/plugins/fast-syntax-highlighting"]
+	path = shell/plugins/fast-syntax-highlighting
+	url = https://github.com/zdharma/fast-syntax-highlighting.git

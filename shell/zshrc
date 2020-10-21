@@ -1,73 +1,171 @@
+# profiling to ensure that the prompt is always fast!!
+zmodload zsh/zprof # profiler
+#######################################################################################################################
+# Setup
+#######################################################################################################################
+# Z shell configuration options
+# Adopted from the section below regarding the default configuration for a Mac.
+if [[ "$(locale LC_CTYPE)" == "UTF-8" ]]; then
+    setopt COMBINING_CHARS # required for proper rendering of UTF-8 characters
+fi
+disable log # Disable the log builtin, so we don't conflict with /usr/bin/log
+setopt HIST_EXPIRE_DUPS_FIRST # remove duplicate history before deleting unique history
+setopt SHARE_HISTORY # so that the history file is appended to after every command
+setopt HIST_VERIFY # show the command in the buffer. Prevent direct execution when selecting from history.
+setopt EXTENDED_HISTORY # add the timestamp to history entries.
+setopt HIST_REDUCE_BLANKS # remove extra blanks from commands when adding them to history.
+HISTFILE=${HOME}/.zsh_history # This is the default. explicit > implicit.
+HISTSIZE=10000 # Set much larger than SAVEHIST
+SAVEHIST=2000 # Size of histoy per session. Does it matter because SHARE_HISTORY has already been set.
+
+# homebrew
+BREW_HOME=$(/usr/local/bin/brew --prefix)
+
+# vars
+PLUGINS_DIR=${HOME}/.plugins
+HELPERS_DIR=${HOME}/.helpers
+
+# Source all functions. Needs to be done before setting the PATH because that uses pathmunge from .functions
+[[ -f ${HOME}/.functions ]] && source ${HOME}/.functions
+
+# Setup PATH
+# Always prefer binaries managed by brew to binaryies managed by Apple.
+# `pathmunge <path>`` will add <path> to the start of $PATH. The first path to be searched should be munged last.
+# `pathmunge <path> after` will add <path> to the end of $PATH. The last path to search should be munged last.
+# TODO: Separate this out for root and non root. For root, it's better to use Apple's binaries (if available).
+[[ -d ${BREW_HOME}/opt/coreutils/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/coreutils/libexec/gnubin || echoerr "PATH not configured"
+[[ -d ${BREW_HOME}/bin ]] && pathmunge ${BREW_HOME}/bin || echoerr "PATH not configured"
+[[ -d ${HOME}/bin ]] && pathmunge ${HOME}/bin || echoerr "PATH not configured"
+
+# modules
+zmodload zsh/complist
+
+
+#######################################################################################################################
+# Init
+#######################################################################################################################
+# completion
+# zcomp_reset: function to delete the dump file.
+autoload -U -z compinit 
+compinit -C -d ${HOME}/.zcompdump
+
+# command-not-found
+HB_CNF_HANDLER="${BREW_HOME}/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+[[ -f ${HB_CNF_HANDLER} ]] && source ${HB_CNF_HANDLER} || echo err "command-not-found init failed"
+unset HB_CNF_HANDLER
+
+# twf
+[[ -f ${HELPERS_DIR}/twf ]] && source ${HELPERS_DIR}/twf || echo err"twf init failed"
+
+# fzf-tab
+# [[ -f ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh ]] && source ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh || echo err "fzf-tab init failed"
+# [[ -f ${HELPERS_DIR}/fzf-tab ]] && source ${HELPERS_DIR}/fzf-tab || echo err "fzf-tab init failed"
+
+# fzf
+[[ -f ${HELPERS_DIR}/fzf ]] && source ${HELPERS_DIR}/fzf || echo err "fzf init failed"
+
+# fasd 
+# Using a cache file to init faster. 
+# WARN: This init file has some custom modifications.
+[[ -f ${PLUGINS_DIR}/fasd/fasd ]] && source ${PLUGINS_DIR}/fasd/fasd || echo err "fasd init failed"
+[[ -f ${HELPERS_DIR}/fasd-init ]] && source ${HELPERS_DIR}/fasd-init || echo err "fasd init failed"
+
+# aliases
+source ${HOME}/.aliases
+
+
+#######################################################################################################################
+# syntax highlighting
+# NOTE: This needs to be kept at the end of this file.
+#######################################################################################################################
+# [[ -f ${PLUGINS_DIR}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && \
+#                             source ${PLUGINS_DIR}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -f ${PLUGINS_DIR}/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ]] && \
+        source ${PLUGINS_DIR}/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh || echoerr "syntax highlighting init failed"
+
+
+#######################################################################################################################
+# Cleanup
+#######################################################################################################################
+unset BREW_HOME
+unset PLUGINS_DIR
+unset HELPERS_DIR
+
+
+#######################################################################################################################
+# Everthing in this sections is a part of the default zsh that shipped with MacOS. This has been retained only for
+# reference. Wherever needed, I've copied the relavant portions from below and retained them.
+#######################################################################################################################
 # System-wide profile for interactive zsh(1) shells.
 
 # Setup user specific overrides for this in ~/.zshrc. See zshbuiltins(1)
 # and zshoptions(1) for more details.
 
 # Correctly display UTF-8 with combining characters.
-if [[ "$(locale LC_CTYPE)" == "UTF-8" ]]; then
-    setopt COMBINING_CHARS
-fi
+# if [[ "$(locale LC_CTYPE)" == "UTF-8" ]]; then
+#     setopt COMBINING_CHARS
+# fi
 
 # Disable the log builtin, so we don't conflict with /usr/bin/log
-disable log
+# disable log
 
 # Save command history
-HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
-HISTSIZE=2000
-SAVEHIST=1000
+# HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+# HISTSIZE=2000
+# SAVEHIST=1000
 
 # Beep on error
-setopt BEEP
+# setopt BEEP
 
 # Use keycodes (generated via zkbd) if present, otherwise fallback on
 # values from terminfo
-if [[ -r ${ZDOTDIR:-$HOME}/.zkbd/${TERM}-${VENDOR} ]] ; then
-    source ${ZDOTDIR:-$HOME}/.zkbd/${TERM}-${VENDOR}
-else
-    typeset -g -A key
+# if [[ -r ${ZDOTDIR:-$HOME}/.zkbd/${TERM}-${VENDOR} ]] ; then
+#     source ${ZDOTDIR:-$HOME}/.zkbd/${TERM}-${VENDOR}
+# else
+#     typeset -g -A key
 
-    [[ -n "$terminfo[kf1]" ]] && key[F1]=$terminfo[kf1]
-    [[ -n "$terminfo[kf2]" ]] && key[F2]=$terminfo[kf2]
-    [[ -n "$terminfo[kf3]" ]] && key[F3]=$terminfo[kf3]
-    [[ -n "$terminfo[kf4]" ]] && key[F4]=$terminfo[kf4]
-    [[ -n "$terminfo[kf5]" ]] && key[F5]=$terminfo[kf5]
-    [[ -n "$terminfo[kf6]" ]] && key[F6]=$terminfo[kf6]
-    [[ -n "$terminfo[kf7]" ]] && key[F7]=$terminfo[kf7]
-    [[ -n "$terminfo[kf8]" ]] && key[F8]=$terminfo[kf8]
-    [[ -n "$terminfo[kf9]" ]] && key[F9]=$terminfo[kf9]
-    [[ -n "$terminfo[kf10]" ]] && key[F10]=$terminfo[kf10]
-    [[ -n "$terminfo[kf11]" ]] && key[F11]=$terminfo[kf11]
-    [[ -n "$terminfo[kf12]" ]] && key[F12]=$terminfo[kf12]
-    [[ -n "$terminfo[kf13]" ]] && key[F13]=$terminfo[kf13]
-    [[ -n "$terminfo[kf14]" ]] && key[F14]=$terminfo[kf14]
-    [[ -n "$terminfo[kf15]" ]] && key[F15]=$terminfo[kf15]
-    [[ -n "$terminfo[kf16]" ]] && key[F16]=$terminfo[kf16]
-    [[ -n "$terminfo[kf17]" ]] && key[F17]=$terminfo[kf17]
-    [[ -n "$terminfo[kf18]" ]] && key[F18]=$terminfo[kf18]
-    [[ -n "$terminfo[kf19]" ]] && key[F19]=$terminfo[kf19]
-    [[ -n "$terminfo[kf20]" ]] && key[F20]=$terminfo[kf20]
-    [[ -n "$terminfo[kbs]" ]] && key[Backspace]=$terminfo[kbs]
-    [[ -n "$terminfo[kich1]" ]] && key[Insert]=$terminfo[kich1]
-    [[ -n "$terminfo[kdch1]" ]] && key[Delete]=$terminfo[kdch1]
-    [[ -n "$terminfo[khome]" ]] && key[Home]=$terminfo[khome]
-    [[ -n "$terminfo[kend]" ]] && key[End]=$terminfo[kend]
-    [[ -n "$terminfo[kpp]" ]] && key[PageUp]=$terminfo[kpp]
-    [[ -n "$terminfo[knp]" ]] && key[PageDown]=$terminfo[knp]
-    [[ -n "$terminfo[kcuu1]" ]] && key[Up]=$terminfo[kcuu1]
-    [[ -n "$terminfo[kcub1]" ]] && key[Left]=$terminfo[kcub1]
-    [[ -n "$terminfo[kcud1]" ]] && key[Down]=$terminfo[kcud1]
-    [[ -n "$terminfo[kcuf1]" ]] && key[Right]=$terminfo[kcuf1]
-fi
+#     [[ -n "$terminfo[kf1]" ]] && key[F1]=$terminfo[kf1]
+#     [[ -n "$terminfo[kf2]" ]] && key[F2]=$terminfo[kf2]
+#     [[ -n "$terminfo[kf3]" ]] && key[F3]=$terminfo[kf3]
+#     [[ -n "$terminfo[kf4]" ]] && key[F4]=$terminfo[kf4]
+#     [[ -n "$terminfo[kf5]" ]] && key[F5]=$terminfo[kf5]
+#     [[ -n "$terminfo[kf6]" ]] && key[F6]=$terminfo[kf6]
+#     [[ -n "$terminfo[kf7]" ]] && key[F7]=$terminfo[kf7]
+#     [[ -n "$terminfo[kf8]" ]] && key[F8]=$terminfo[kf8]
+#     [[ -n "$terminfo[kf9]" ]] && key[F9]=$terminfo[kf9]
+#     [[ -n "$terminfo[kf10]" ]] && key[F10]=$terminfo[kf10]
+#     [[ -n "$terminfo[kf11]" ]] && key[F11]=$terminfo[kf11]
+#     [[ -n "$terminfo[kf12]" ]] && key[F12]=$terminfo[kf12]
+#     [[ -n "$terminfo[kf13]" ]] && key[F13]=$terminfo[kf13]
+#     [[ -n "$terminfo[kf14]" ]] && key[F14]=$terminfo[kf14]
+#     [[ -n "$terminfo[kf15]" ]] && key[F15]=$terminfo[kf15]
+#     [[ -n "$terminfo[kf16]" ]] && key[F16]=$terminfo[kf16]
+#     [[ -n "$terminfo[kf17]" ]] && key[F17]=$terminfo[kf17]
+#     [[ -n "$terminfo[kf18]" ]] && key[F18]=$terminfo[kf18]
+#     [[ -n "$terminfo[kf19]" ]] && key[F19]=$terminfo[kf19]
+#     [[ -n "$terminfo[kf20]" ]] && key[F20]=$terminfo[kf20]
+#     [[ -n "$terminfo[kbs]" ]] && key[Backspace]=$terminfo[kbs]
+#     [[ -n "$terminfo[kich1]" ]] && key[Insert]=$terminfo[kich1]
+#     [[ -n "$terminfo[kdch1]" ]] && key[Delete]=$terminfo[kdch1]
+#     [[ -n "$terminfo[khome]" ]] && key[Home]=$terminfo[khome]
+#     [[ -n "$terminfo[kend]" ]] && key[End]=$terminfo[kend]
+#     [[ -n "$terminfo[kpp]" ]] && key[PageUp]=$terminfo[kpp]
+#     [[ -n "$terminfo[knp]" ]] && key[PageDown]=$terminfo[knp]
+#     [[ -n "$terminfo[kcuu1]" ]] && key[Up]=$terminfo[kcuu1]
+#     [[ -n "$terminfo[kcub1]" ]] && key[Left]=$terminfo[kcub1]
+#     [[ -n "$terminfo[kcud1]" ]] && key[Down]=$terminfo[kcud1]
+#     [[ -n "$terminfo[kcuf1]" ]] && key[Right]=$terminfo[kcuf1]
+# fi
 
 # Default key bindings
-[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
-[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
-[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
-[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
-[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
+# [[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
+# [[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
+# [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
+# [[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
+# [[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
 
 # Default prompt
-PS1="%n@%m %1~ %# "
+# PS1="%n@%m %1~ %# "
 
 # Useful support for interacting with Terminal.app or other terminal programs
-[ -r "/etc/zshrc_$TERM_PROGRAM" ] && . "/etc/zshrc_$TERM_PROGRAM"
+# [ -r "/etc/zshrc_$TERM_PROGRAM" ] && . "/etc/zshrc_$TERM_PROGRAM"

@@ -1,0 +1,52 @@
+# ls
+alias ls="ls -A" # change the default behaviour to print "almost all".
+alias l="ls -1A" # print 1 file per line, almost all files
+alias ll="ls -lAh" # print long form, almost all, humar readable.
+alias lll='ls -lah' # print long form, all, human readable
+alias lt='ls -lAtrh' # print long form, almost all, ordered by time modified (oldest first) and human readable
+
+# safer commands. add the "-i" option by default to cp, mv and rm.
+alias rm='rm -I'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# utils
+alias dud='du -d 1 -h' # disk utilization for all directories
+alias duf='du -sh *' # disk utilization for all files and directories
+alias findd='find . -type d -iname' # find file by name (case-insensitive)
+alias findf='find . -type f -iname' # find directory by name (case insensitive)
+
+# sugar
+alias grep='grep --color'
+alias egrep='egrep --color'
+alias -g E2OUT='2>&1'
+
+# fasd aliases
+# I'm not using any of the other aliases, but they are commonly defined for shell jumping.
+# alias a='fasd -a'        # any
+# alias s='fasd -si'       # show / search / select
+# alias d='fasd -d'        # directory
+# alias f='fasd -f'        # file
+# alias sd='fasd -sid'     # interactive directory selection
+# alias sf='fasd -sif'     # interactive file selection
+# alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+# alias zz='fasd_cd -d -i' # cd with interactive selection
+alias jj='fasd_cd -d -i' # cd with interactive selection. "jj" is faster to type than "zz".
+alias j='fasd_cd -d'     # cd, same functionality as j in autojump
+alias o='f -e open'      # quick opening files with open
+alias v='f -e vim'       # quick editing files with vim
+
+# history
+alias h='history'
+alias hs='history | grep'
+alias hsi='history | grep -i'
+
+alias k="kubectl"
+
+###########################
+########## Notes ##########
+###########################
+# * https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh
+#   The common aliases plugin for zsh. I've ripped things from here, but don't want to use all of those aliases. 
+# * I've also ripped some aliases from other zsh locations
+#    * https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/history/history.plugin.zsh

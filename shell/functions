@@ -1,0 +1,33 @@
+#######################################################################################################################
+# All common functions should be defined here. 
+# Though functions can use commands that aren't added to the path at the time of definition, this file shouldn't 
+# directly call any such functions because this file is sourced before the $PATH is updated. 
+#######################################################################################################################
+
+
+# The pathmunge function that is a part of Fedora/CentOS dotfiles. Copied from CentOS sources.
+# Unlike the source code in CentOS, this function isn't disabled after being used in my dotfiles.
+# Usage:
+# `pathmunge <path>`` to add <path> to the start of $PATH.
+# `pathmunge <path> after` to add <path> to the end of $PATH.
+pathmunge () {
+    case ":${PATH}:" in
+        *:"$1":*)
+            ;;
+        *)
+            if [ "$2" = "after" ] ; then
+                PATH=$PATH:$1
+            else
+                PATH=$1:$PATH
+            fi
+    esac
+}
+
+# echo to error
+# https://stackoverflow.com/a/62235327/1365918
+echoerr() { printf "\e[31;1m%s\e[0m\n" "$*" >&2; }
+
+# delete the zcompdump file so that it's automatically regenerated the next time it's needed.
+zcomp_reset() {
+    rm -f ${ZHOME}/.zcompdump
+}
