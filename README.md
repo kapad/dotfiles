@@ -1,17 +1,10 @@
 # TODOs
 
-1. aliases
-    * gnu commands that I use instead of macos commands
-    * git aliases
-2. cli utils
-    * autojump
-2. zshrc
-    * basic zshrc
-    * plugins for zsh
-    * ps1
-3. setup zshell in iterm to load a different config/home config than what the mac does.
-4. brew system setup
-5. 
+* rename all helpers with "*.zsh"
+* Is my completion setup well? What's really happening under the hood?
+* Something like Karabiner. 
+    * Setup the config. 
+    * Also source the config here for later portability.
 
 
 # Resources

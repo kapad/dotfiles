@@ -17,8 +17,8 @@ alias findd='find . -type d -iname' # find file by name (case-insensitive)
 alias findf='find . -type f -iname' # find directory by name (case insensitive)
 
 # sugar
-alias grep='grep --color'
-alias egrep='egrep --color'
+# alias grep='grep --color'
+# alias egrep='egrep --color'
 alias -g E2OUT='2>&1'
 
 # fasd aliases

@@ -19,10 +19,8 @@ HISTFILE=${HOME}/.zsh_history # This is the default. explicit > implicit.
 HISTSIZE=10000 # Set much larger than SAVEHIST
 SAVEHIST=2000 # Size of histoy per session. Does it matter because SHARE_HISTORY has already been set.
 
-# homebrew
-BREW_HOME=$(/usr/local/bin/brew --prefix)
-
 # vars
+BREW_HOME=$(/usr/local/bin/brew --prefix) # this needs to be full path, because we still haven't setup PATH
 PLUGINS_DIR=${HOME}/.plugins
 HELPERS_DIR=${HOME}/.helpers
 ZSH_CACHE_DIR=${HOME}/.zsh_cache
@@ -46,6 +44,10 @@ zmodload zsh/complist
 #######################################################################################################################
 # Init
 #######################################################################################################################
+# keybindings
+# TODO - fix the keybindings. What's happening under the hood (macos, iterm, zle, etc)? 
+# [[ -f ${HELPERS_DIR}/keybindings.zsh ]] && source ${HELPERS_DIR}/keybindings.zsh || echoerr "Unable to load keybindings"
+
 # completion
 # zcomp_reset: function to delete the dump file.
 autoload -U -z compinit 
@@ -83,6 +85,7 @@ unset HB_CNF_HANDLER
 
 # helpers
 [[ -f ${HELPERS_DIR}/git ]] && source ${HELPERS_DIR}/git || echoerr "cannot load git helper"
+[[ -f ${HELPERS_DIR}/grep ]] && source ${HELPERS_DIR}/grep || echoerr "cannot load grep helper"
 
 # aliases
 source ${HOME}/.aliases
@@ -104,6 +107,7 @@ source ${HOME}/.aliases
 unset BREW_HOME
 unset PLUGINS_DIR
 unset HELPERS_DIR
+unset ZSH_CACHE_DIR
 
 
 #######################################################################################################################
