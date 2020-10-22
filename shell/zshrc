@@ -14,6 +14,7 @@ setopt SHARE_HISTORY # so that the history file is appended to after every comma
 setopt HIST_VERIFY # show the command in the buffer. Prevent direct execution when selecting from history.
 setopt EXTENDED_HISTORY # add the timestamp to history entries.
 setopt HIST_REDUCE_BLANKS # remove extra blanks from commands when adding them to history.
+setopt AUTO_CD # cd even if directory is provided but "cd" got missed.
 HISTFILE=${HOME}/.zsh_history # This is the default. explicit > implicit.
 HISTSIZE=10000 # Set much larger than SAVEHIST
 SAVEHIST=2000 # Size of histoy per session. Does it matter because SHARE_HISTORY has already been set.
@@ -24,6 +25,7 @@ BREW_HOME=$(/usr/local/bin/brew --prefix)
 # vars
 PLUGINS_DIR=${HOME}/.plugins
 HELPERS_DIR=${HOME}/.helpers
+ZSH_CACHE_DIR=${HOME}/.zsh_cache
 
 # Source all functions. Needs to be done before setting the PATH because that uses pathmunge from .functions
 [[ -f ${HOME}/.functions ]] && source ${HOME}/.functions
@@ -48,27 +50,39 @@ zmodload zsh/complist
 # zcomp_reset: function to delete the dump file.
 autoload -U -z compinit 
 compinit -C -d ${HOME}/.zcompdump
+# custom completion styles
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path ${ZSH_CACHE_DIR}
+zstyle '*' single-ignored show
 
 # command-not-found
 HB_CNF_HANDLER="${BREW_HOME}/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
 [[ -f ${HB_CNF_HANDLER} ]] && source ${HB_CNF_HANDLER} || echo err "command-not-found init failed"
 unset HB_CNF_HANDLER
 
+# fzf
+[[ -f ${HELPERS_DIR}/fzf ]] && source ${HELPERS_DIR}/fzf || echo err "fzf init failed"
+
 # twf
 [[ -f ${HELPERS_DIR}/twf ]] && source ${HELPERS_DIR}/twf || echo err"twf init failed"
 
 # fzf-tab
-# [[ -f ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh ]] && source ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh || echo err "fzf-tab init failed"
-# [[ -f ${HELPERS_DIR}/fzf-tab ]] && source ${HELPERS_DIR}/fzf-tab || echo err "fzf-tab init failed"
-
-# fzf
-[[ -f ${HELPERS_DIR}/fzf ]] && source ${HELPERS_DIR}/fzf || echo err "fzf init failed"
+[[ -f ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh ]] && source ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh || echo err "fzf-tab init failed"
+[[ -f ${HELPERS_DIR}/fzf-tab ]] && source ${HELPERS_DIR}/fzf-tab || echo err "fzf-tab init failed"
 
 # fasd 
 # Using a cache file to init faster. 
 # WARN: This init file has some custom modifications.
 [[ -f ${PLUGINS_DIR}/fasd/fasd ]] && source ${PLUGINS_DIR}/fasd/fasd || echo err "fasd init failed"
 [[ -f ${HELPERS_DIR}/fasd-init ]] && source ${HELPERS_DIR}/fasd-init || echo err "fasd init failed"
+
+# helpers
+[[ -f ${HELPERS_DIR}/git ]] && source ${HELPERS_DIR}/git || echoerr "cannot load git helper"
 
 # aliases
 source ${HOME}/.aliases
