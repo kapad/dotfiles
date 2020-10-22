@@ -53,6 +53,7 @@ zmodload zsh/complist
 autoload -U -z compinit 
 compinit -C -d ${HOME}/.zcompdump
 # custom completion styles
+# move this to the completion helper
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' list-colors ''
@@ -80,8 +81,8 @@ unset HB_CNF_HANDLER
 # fasd 
 # Using a cache file to init faster. 
 # WARN: This init file has some custom modifications.
-[[ -f ${PLUGINS_DIR}/fasd/fasd ]] && source ${PLUGINS_DIR}/fasd/fasd || echo err "fasd init failed"
-[[ -f ${HELPERS_DIR}/fasd-init ]] && source ${HELPERS_DIR}/fasd-init || echo err "fasd init failed"
+# [[ -f ${PLUGINS_DIR}/fasd/fasd ]] && source ${PLUGINS_DIR}/fasd/fasd || echo err "fasd init failed"
+# [[ -f ${HELPERS_DIR}/fasd-init ]] && source ${HELPERS_DIR}/fasd-init || echo err "fasd init failed"
 
 # helpers
 [[ -f ${HELPERS_DIR}/git ]] && source ${HELPERS_DIR}/git || echoerr "cannot load git helper"
@@ -89,6 +90,9 @@ unset HB_CNF_HANDLER
 
 # aliases
 source ${HOME}/.aliases
+
+# prompt
+
 
 
 #######################################################################################################################
