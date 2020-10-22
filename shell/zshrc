@@ -26,7 +26,8 @@ HELPERS_DIR=${HOME}/.helpers
 ZSH_CACHE_DIR=${HOME}/.zsh_cache
 
 # Source all functions. Needs to be done before setting the PATH because that uses pathmunge from .functions
-[[ -f ${HOME}/.functions ]] && source ${HOME}/.functions
+# echoerr is a part of functions and cannot be used here. 
+[[ -f ${HELPERS_DIR}/functions.zsh ]] && source ${HELPERS_DIR}/functions.zsh || printf "\e[31;1m%s\e[0m\n" "unable to load functions" >&2
 
 # Setup PATH
 # Always prefer binaries managed by brew to binaryies managed by Apple.
@@ -69,14 +70,14 @@ HB_CNF_HANDLER="${BREW_HOME}/Homebrew/Library/Taps/homebrew/homebrew-command-not
 unset HB_CNF_HANDLER
 
 # fzf
-[[ -f ${HELPERS_DIR}/fzf ]] && source ${HELPERS_DIR}/fzf || echo err "fzf init failed"
+[[ -f ${HELPERS_DIR}/fzf.zsh ]] && source ${HELPERS_DIR}/fzf.zsh || echo err "fzf init failed"
 
 # twf
-[[ -f ${HELPERS_DIR}/twf ]] && source ${HELPERS_DIR}/twf || echo err"twf init failed"
+[[ -f ${HELPERS_DIR}/twf.zsh ]] && source ${HELPERS_DIR}/twf.zsh || echo err"twf init failed"
 
 # fzf-tab
 [[ -f ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh ]] && source ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh || echo err "fzf-tab init failed"
-[[ -f ${HELPERS_DIR}/fzf-tab ]] && source ${HELPERS_DIR}/fzf-tab || echo err "fzf-tab init failed"
+[[ -f ${HELPERS_DIR}/fzf-tab.zsh ]] && source ${HELPERS_DIR}/fzf-tab.zsh || echo err "fzf-tab init failed"
 
 # fasd 
 # Using a cache file to init faster. 
@@ -85,11 +86,11 @@ unset HB_CNF_HANDLER
 # [[ -f ${HELPERS_DIR}/fasd-init ]] && source ${HELPERS_DIR}/fasd-init || echo err "fasd init failed"
 
 # helpers
-[[ -f ${HELPERS_DIR}/git ]] && source ${HELPERS_DIR}/git || echoerr "cannot load git helper"
-[[ -f ${HELPERS_DIR}/grep ]] && source ${HELPERS_DIR}/grep || echoerr "cannot load grep helper"
+[[ -f ${HELPERS_DIR}/git.zsh ]] && source ${HELPERS_DIR}/git.zsh || echoerr "cannot load git helper"
+[[ -f ${HELPERS_DIR}/grep.zsh ]] && source ${HELPERS_DIR}/grep.zsh || echoerr "cannot load grep helper"
 
 # aliases
-source ${HOME}/.aliases
+[[ -f ${HELPERS_DIR}/aliases.zsh ]] && source ${HELPERS_DIR}/aliases.zsh || echoerr "cannot load aliases"
 
 # prompt
 

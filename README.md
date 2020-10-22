@@ -28,6 +28,9 @@
 
 # Resources
 
+## Bookmarks
+* zsh-lovers: https://grml.org/zsh/zsh-lovers.html
+
 ## Inspiration
 * oh-my-zsh (lots of rips from here)
 * https://github.com/mathiasbynens/dotfiles

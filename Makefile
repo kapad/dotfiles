@@ -56,10 +56,6 @@ $(call check_defined, HOME, User's home directory)
 link:
 	@ln -sf ${current_dir}/shell/zshrc ${HOME}/.zshrc
 	@echo 'Created ${HOME}/.zshrc'
-	@ln -sf ${current_dir}/shell/functions ${HOME}/.functions
-	@echo 'Created ${HOME}/.functions'
-	@ln -sf ${current_dir}/shell/aliases ${HOME}/.aliases
-	@echo 'Created ${HOME}/.aliases'
 	@ln -sf ${current_dir}/shell/plugins ${HOME}/.plugins
 	@echo 'Created ${HOME}/.plugins'
 	@ln -sf ${current_dir}/shell/helpers ${HOME}/.helpers
@@ -68,8 +64,6 @@ link:
 .PHONY: unlink
 unlink:
 	@rm -f ${HOME}/.zshrc
-	@rm -f ${HOME}/.functions
-	@rm -f ${HOME}/.aliases
 	@rm -f ${HOME}/.plugins
 	@rm -f ${HOME}/.helpers
 	@echo "Unlinked all files"
