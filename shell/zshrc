@@ -1,8 +1,22 @@
 #######################################################################################################################
 # Optional startup
+# ################
+# This section should be very light. For eg, the profiler has to be one of the first mods loaded so that it is able 
+# to profile everything else. Another use case would be to set some options to debug this rc script.
 #######################################################################################################################
 # profiling to ensure that the prompt is always fast!!
 zmodload zsh/zprof # profiler - disable once the dotfiles are stable and fast
+
+#######################################################################################################################
+# p10k instant prompt
+# ###################
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+#######################################################################################################################
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 #######################################################################################################################
 # Setup
@@ -39,6 +53,7 @@ ZSH_CACHE_DIR=${HOME}/.zsh_cache
 # `pathmunge <path>`` will add <path> to the start of $PATH. The first path to be searched should be munged last.
 # `pathmunge <path> after` will add <path> to the end of $PATH. The last path to search should be munged last.
 # TODO: Separate this out for root and non root. For root, it's better to use Apple's binaries (if available).
+[[ -d ${HOME}/go/bin ]] && pathmunge ${HOME}/go/bin || echoerr "PATH not configured"
 [[ -d ${BREW_HOME}/opt/coreutils/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/coreutils/libexec/gnubin || echoerr "PATH not configured"
 [[ -d ${BREW_HOME}/bin ]] && pathmunge ${BREW_HOME}/bin || echoerr "PATH not configured"
 [[ -d ${HOME}/bin ]] && pathmunge ${HOME}/bin || echoerr "PATH not configured"
@@ -93,6 +108,9 @@ FZ_SUBDIR_CMD='jj'
 # zsh autosuggestions
 [[ -f ${PLUGINS_DIR}/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source ${PLUGINS_DIR}/zsh-autosuggestions/zsh-autosuggestions.zsh || echoerr "zsh-autosuggestions init failed"
 
+# the fuck
+[[ -f ${HELPERS_DIR}/thefuck.zsh ]] && source ${HELPERS_DIR}/thefuck.zsh || echoerr "the fuck init failed"
+
 # helpers
 [[ -f ${HELPERS_DIR}/git.zsh ]] && source ${HELPERS_DIR}/git.zsh || echoerr "cannot load git helper"
 [[ -f ${HELPERS_DIR}/grep.zsh ]] && source ${HELPERS_DIR}/grep.zsh || echoerr "cannot load grep helper"
@@ -101,8 +119,9 @@ FZ_SUBDIR_CMD='jj'
 [[ -f ${HELPERS_DIR}/aliases.zsh ]] && source ${HELPERS_DIR}/aliases.zsh || echoerr "cannot load aliases"
 
 # powerlevel10k
-[[ -f ${HELPERS_DIR}/powerlevel10k-config.zsh ]] && source ${HELPERS_DIR}/powerlevel10k-config.zsh || echoerr "cannot load powerlevel10k config"
+[[ -f ${HELPERS_DIR}/powerlevel10k.zsh ]] && source ${HELPERS_DIR}/powerlevel10k.zsh || echoerr "cannot load powerlevel10k"
 [[ -f ${PLUGINS_DIR}/powerlevel10k/powerlevel10k.zsh-theme ]] && source ${PLUGINS_DIR}/powerlevel10k/powerlevel10k.zsh-theme || echoerr 'powerlevel10k init failed'
+# To customize prompt, edit helpers/powerlevel10k.zsh
 
 
 #######################################################################################################################

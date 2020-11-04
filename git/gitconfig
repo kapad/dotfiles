@@ -1,3 +1,21 @@
 [author]
   name = Rohan Kapadia
   email = rohankapadia@gmail.com
+
+[pull]
+  rebase = false
+
+[alias]
+  lgsummary = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+  pushup = "!git push --set-upstream origin $(git symbolic-ref --short HEAD)"
+
+[push]
+  default = upstream
+
+# to use the osxkeychain as the credential helper
+# [credential]
+#   helper = osxkeychain
+
+# to rewrite all https git clones as ssh
+# [url "git@github.com:"]
+#   insteadOf = https://github.com/
