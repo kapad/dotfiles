@@ -20,6 +20,7 @@ alias findf='find . -type f -iname' # find directory by name (case insensitive)
 # alias grep='grep --color'
 # alias egrep='egrep --color'
 alias -g E2OUT='2>&1'
+alias yqc='yq -PC r -'
 
 # fasd aliases
 # I'm not using any of the other aliases, but they are commonly defined for shell jumping.
@@ -31,10 +32,15 @@ alias -g E2OUT='2>&1'
 # alias sf='fasd -sif'     # interactive file selection
 # alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 # alias zz='fasd_cd -d -i' # cd with interactive selection
-alias jj='fasd_cd -d -i' # cd with interactive selection. "jj" is faster to type than "zz".
-alias j='fasd_cd -d'     # cd, same functionality as j in autojump
-alias o='f -e open'      # quick opening files with open
-alias v='f -e vim'       # quick editing files with vim
+# alias jj='fasd_cd -d -i' # cd with interactive selection. "jj" is faster to type than "zz".
+# alias j='fasd_cd -d'     # cd, same functionality as j in autojump
+# alias o='f -e open'      # quick opening files with open
+# alias v='f -e vim'       # quick editing files with vim
+
+# z aliases
+alias j='z'
+alias jj='z -c'
+alias zz='z'
 
 # history
 alias h='history'

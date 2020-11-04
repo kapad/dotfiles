@@ -1,5 +1,9 @@
+#######################################################################################################################
+# Optional startup
+#######################################################################################################################
 # profiling to ensure that the prompt is always fast!!
-zmodload zsh/zprof # profiler
+zmodload zsh/zprof # profiler - disable once the dotfiles are stable and fast
+
 #######################################################################################################################
 # Setup
 #######################################################################################################################
@@ -15,6 +19,7 @@ setopt HIST_VERIFY # show the command in the buffer. Prevent direct execution wh
 setopt EXTENDED_HISTORY # add the timestamp to history entries.
 setopt HIST_REDUCE_BLANKS # remove extra blanks from commands when adding them to history.
 setopt AUTO_CD # cd even if directory is provided but "cd" got missed.
+setopt GLOBDOTS # by default, glob completion also matches names starting with "."
 HISTFILE=${HOME}/.zsh_history # This is the default. explicit > implicit.
 HISTSIZE=10000 # Set much larger than SAVEHIST
 SAVEHIST=2000 # Size of histoy per session. Does it matter because SHARE_HISTORY has already been set.
@@ -53,37 +58,40 @@ zmodload zsh/complist
 # zcomp_reset: function to delete the dump file.
 autoload -U -z compinit 
 compinit -C -d ${HOME}/.zcompdump
-# custom completion styles
-# move this to the completion helper
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*' special-dirs true
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
-zstyle ':completion:*' use-cache yes
-zstyle ':completion:*' cache-path ${ZSH_CACHE_DIR}
-zstyle '*' single-ignored show
+[[ -f ${HELPERS_DIR}/completion.zsh ]] && source ${HELPERS_DIR}/completion.zsh || echoerr "unable to load completion helper"
 
 # command-not-found
 HB_CNF_HANDLER="${BREW_HOME}/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
-[[ -f ${HB_CNF_HANDLER} ]] && source ${HB_CNF_HANDLER} || echo err "command-not-found init failed"
+[[ -f ${HB_CNF_HANDLER} ]] && source ${HB_CNF_HANDLER} || echoerr "command-not-found init failed"
 unset HB_CNF_HANDLER
 
 # fzf
-[[ -f ${HELPERS_DIR}/fzf.zsh ]] && source ${HELPERS_DIR}/fzf.zsh || echo err "fzf init failed"
+[[ -f ${HELPERS_DIR}/fzf.zsh ]] && source ${HELPERS_DIR}/fzf.zsh || echoerr "fzf init failed"
 
 # twf
-[[ -f ${HELPERS_DIR}/twf.zsh ]] && source ${HELPERS_DIR}/twf.zsh || echo err"twf init failed"
+[[ -f ${HELPERS_DIR}/twf.zsh ]] && source ${HELPERS_DIR}/twf.zsh || echoerr "twf init failed"
 
 # fzf-tab
-[[ -f ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh ]] && source ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh || echo err "fzf-tab init failed"
-[[ -f ${HELPERS_DIR}/fzf-tab.zsh ]] && source ${HELPERS_DIR}/fzf-tab.zsh || echo err "fzf-tab init failed"
+[[ -f ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh ]] && source ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh || echoerr "fzf-tab init failed"
+[[ -f ${HELPERS_DIR}/fzf-tab.zsh ]] && source ${HELPERS_DIR}/fzf-tab.zsh || echoerr "fzf-tab init failed"
 
 # fasd 
 # Using a cache file to init faster. 
 # WARN: This init file has some custom modifications.
-# [[ -f ${PLUGINS_DIR}/fasd/fasd ]] && source ${PLUGINS_DIR}/fasd/fasd || echo err "fasd init failed"
-# [[ -f ${HELPERS_DIR}/fasd-init ]] && source ${HELPERS_DIR}/fasd-init || echo err "fasd init failed"
+# Issues with fasd and fzf integrations. And I want autojumping to integrate with fzf, so 
+# [[ -f ${PLUGINS_DIR}/fasd/fasd ]] && source ${PLUGINS_DIR}/fasd/fasd || echoerr "fasd init failed"
+# [[ -f ${HELPERS_DIR}/fasd-init.zsh ]] && source ${HELPERS_DIR}/fasd-init.zsh || echoerr "fasd-helper init failed"
+# [[ -f ${PLUGINS_DIR}/fzf-fasd/fzf-fasd.plugin.zsh ]] && source ${PLUGINS_DIR}/fzf-fasd/fzf-fasd.plugin.zsh j || echoerr "fzf-fasd init failed"
+
+# z
+# Using z and not fasd because the integration with fzf for z works, but for fasd it doesn't.
+[[ -f ${PLUGINS_DIR}/z/z.sh ]] && source ${PLUGINS_DIR}/z/z.sh || echoerr "z init failed"
+FZ_CMD='j'
+FZ_SUBDIR_CMD='jj'
+[[ -f ${PLUGINS_DIR}/fz/fz.sh ]] && source ${PLUGINS_DIR}/fz/fz.sh || echoerr "fz init failed"
+
+# zsh autosuggestions
+[[ -f ${PLUGINS_DIR}/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source ${PLUGINS_DIR}/zsh-autosuggestions/zsh-autosuggestions.zsh || echoerr "zsh-autosuggestions init failed"
 
 # helpers
 [[ -f ${HELPERS_DIR}/git.zsh ]] && source ${HELPERS_DIR}/git.zsh || echoerr "cannot load git helper"
@@ -92,8 +100,9 @@ unset HB_CNF_HANDLER
 # aliases
 [[ -f ${HELPERS_DIR}/aliases.zsh ]] && source ${HELPERS_DIR}/aliases.zsh || echoerr "cannot load aliases"
 
-# prompt
-
+# powerlevel10k
+[[ -f ${HELPERS_DIR}/powerlevel10k-config.zsh ]] && source ${HELPERS_DIR}/powerlevel10k-config.zsh || echoerr "cannot load powerlevel10k config"
+[[ -f ${PLUGINS_DIR}/powerlevel10k/powerlevel10k.zsh-theme ]] && source ${PLUGINS_DIR}/powerlevel10k/powerlevel10k.zsh-theme || echoerr 'powerlevel10k init failed'
 
 
 #######################################################################################################################

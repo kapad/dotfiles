@@ -19,3 +19,18 @@
 [submodule "shell/plugins/powerlevel10k"]
 	path = shell/plugins/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "shell/plugins/zui"]
+	path = shell/plugins/zui
+	url = https://github.com/zdharma/zui.git
+[submodule "shell/plugins/zsh-autosuggestions"]
+	path = shell/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule "shell/plugins/z"]
+	path = shell/plugins/z
+	url = https://github.com/rupa/z.git
+[submodule "shell/plugins/fz"]
+	path = shell/plugins/fz
+	url = https://github.com/changyuheng/fz.git
+[submodule "shell/plugins/fzf-fasd"]
+	path = shell/plugins/fzf-fasd
+	url = https://github.com/wookayin/fzf-fasd.git

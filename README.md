@@ -1,6 +1,5 @@
 # TODOs
 
-* rename all helpers with "*.zsh"
 * Is my completion setup well? What's really happening under the hood?
 * Something like Karabiner. 
     * Setup the config. 
@@ -29,7 +28,13 @@
 # Resources
 
 ## Bookmarks
+* zsh-refcard: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 * zsh-lovers: https://grml.org/zsh/zsh-lovers.html
+
+## Extended Bookmarks
+* http://aperiodic.net/phil/prompt/
+* https://www.danielmoch.com/posts/2018/11/zsh-compinit-rtfm/
+* 
 
 ## Inspiration
 * oh-my-zsh (lots of rips from here)

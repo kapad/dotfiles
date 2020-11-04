@@ -1,15 +1,17 @@
 # zsh command mode completion
-# TODO stop using 
-_fasd_zsh_cmd_complete() {
-  local compl
-  read -c compl
-  (( $+compstate )) && compstate[insert]=menu # no expand if compsys loaded
-  reply=(${(f)"$(fasd --complete "$compl")"})
-}
+# TODO stop using old style completion here.
+# I've commented out the old style completion, so that atleast the jumping around and word 
+# mode completion can be used until I fix this.
+# _fasd_zsh_cmd_complete() {
+#   local compl
+#   read -c compl
+#   (( $+compstate )) && compstate[insert]=menu # no expand if compsys loaded
+#   reply=(${(f)"$(fasd --complete "$compl")"})
+# }
 
-# enbale command mode completion
-compctl -U -K _fasd_zsh_cmd_complete -V fasd -x 'C[-1,-*e],s[-]n[1,e]' -c - \
-  'c[-1,-A][-1,-D]' -f -- fasd fasd_cd
+# # enbale command mode completion
+# compctl -U -K _fasd_zsh_cmd_complete -V fasd -x 'C[-1,-*e],s[-]n[1,e]' -c - \
+#   'c[-1,-A][-1,-D]' -f -- fasd fasd_cd
 
 (( $+functions[compdef] )) && {
   # zsh word mode completion
@@ -85,5 +87,7 @@ fasd_cd() {
 # function to generate fasd init code
 # WARN: Do not replace this init file with the output of the init code. Instead, replace the relevant parts.
 fasd_gen_init() {
-    fasd --init zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install zsh-hook
+    # fasd --init zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install zsh-hook
+    # disable command mode completion for now.
+    fasd --init zsh-wcomp zsh-wcomp-install zsh-hook
 }
