@@ -59,6 +59,7 @@ link:
 	@ln -sf ${current_dir}/shell/plugins ${HOME}/.plugins
 	@echo 'Created ${HOME}/.plugins'
 	@ln -sf ${current_dir}/shell/helpers ${HOME}/.helpers
+	@echo 'Created ${HOME}/.helpers'
 	@ln -sf ${current_dir}/git/gitconfig ${HOME}/.gitconfig
 	@echo 'Created ${HOME}/.gitconfig'
 
