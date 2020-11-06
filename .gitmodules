@@ -34,3 +34,9 @@
 [submodule "shell/plugins/fzf-fasd"]
 	path = shell/plugins/fzf-fasd
 	url = https://github.com/wookayin/fzf-fasd.git
+[submodule "shell/plugins/kubech"]
+	path = shell/plugins/kubech
+	url = https://github.com/kapad/kubech.git
+[submodule "shell/plugins/kc"]
+	path = shell/plugins/kc
+	url = https://github.com/kapad/kc.git
