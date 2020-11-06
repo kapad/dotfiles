@@ -1,6 +1,12 @@
-[author]
+# [author]
+#   name = Rohan Kapadia
+#   email = rohankapadia@gmail.com
+
+[user]
   name = Rohan Kapadia
   email = rohankapadia@gmail.com
+
+# what the hell is the difference between the author and the user??
 
 [pull]
   rebase = false
