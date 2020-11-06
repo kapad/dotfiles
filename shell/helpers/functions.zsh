@@ -53,6 +53,25 @@ function open_command() {
   ${=open_cmd} "$@" &>/dev/null
 }
 
+# get a table with all supported terminal colors and their numbers.
+function color_table() {
+    for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
+}
+
+# toggle displaying kubernetes context always and only on relevant commands
+function kube_toggle() {
+  if (( ${+POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND} )); then
+    unset POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND
+  else
+    POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
+  fi
+  p10k reload
+  if zle; then
+    zle push-input
+    zle accept-line
+  fi
+}
+
 #
 # Get the value of an alias.
 #
@@ -187,7 +206,7 @@ function omz_urlencode() {
       if [[ "$byte" == " " && -n $spaces_as_plus ]]; then
         url_str+="+"
       else
-        ord=$(( [##16] #byte ))
+        ord='$(( [##16] #byte ))'
         url_str+="%$ord"
       fi
     fi
