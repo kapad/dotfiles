@@ -62,13 +62,24 @@ bindkey -M vicmd "^I" expand-or-complete-with-dots
 # automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
 
+#######################################################################################################################
+# kubectl
+# #######
+# NOTE: Prefer using a customized file after generating it using kubectl completion zsh
+#######################################################################################################################
 # kubectl-ctx and kubectl-ns
-autoload -U -z +X _kubectx
-autoload -U -z +X _kubens
-compdef _kubectx 'kubectl-ctx'
-compdef kctx='kubectl-ctx'
-compdef _kubens 'kubectl-ns'
-compdef kns='kubectl-ns'
+# autoload -U -z +X _kubectx
+# autoload -U -z +X _kubens
+# compdef _kubectx 'kubectl-ctx'
+# compdef kctx='kubectl-ctx'
+# compdef _kubens 'kubectl-ns'
+# compdef kns='kubectl-ns'
+autoload -U -z +X ${HELPERS_DIR}/completion/_kubectl.zsh
+compdef _kubectl.zsh kubectl
+# kc
+autoload -U -z +X ${PLUGINS_DIR}/kc/completion/kc.zsh
+compdef kc.zsh kc
+# kubech
 
 
 #######################################################################################################################

@@ -29,7 +29,7 @@ echoerr() { printf "\e[31;1m%s\e[0m\n" "$*" >&2; }
 
 # delete the zcompdump file so that it's automatically regenerated the next time it's needed.
 zcomp_reset() {
-    rm -f ${ZHOME}/.zcompdump
+    rm -f ${ZSH_CACHE_DIR}/.zcompdump
 }
 
 # deletes all the files in $HOME/.zsh_cache - which is the zsh cache directory.

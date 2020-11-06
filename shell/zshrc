@@ -73,9 +73,10 @@ zmodload zsh/complist
 # completion
 # zcomp_reset: function to delete the dump file.
 # add helpers/completion to the fpath.
-fpath=($fpath ${HELPERS_DIR}/completion) # defines the helper functions
+# I'm explicitly autoloading completions whereever I need them.
+# fpath=(${HELPERS_DIR}/completion $fpath) # defines the helper functions
 autoload -U -z compinit 
-compinit -C -d ${HOME}/.zcompdump
+compinit -C -d ${ZSH_CACHE_DIR}/.zcompdump
 [[ -f ${HELPERS_DIR}/completion.zsh ]] && source ${HELPERS_DIR}/completion.zsh || echoerr "unable to load completion helper"
 
 # command-not-found
@@ -120,6 +121,11 @@ FZ_SUBDIR_CMD='jj'
 
 # aliases
 [[ -f ${HELPERS_DIR}/aliases.zsh ]] && source ${HELPERS_DIR}/aliases.zsh || echoerr "cannot load aliases"
+
+# k8s
+KC_KUBE_PS1_TOGGLE=0
+KC_ITERM_USER_VAR=0
+[[ -f ${PLUGINS_DIR}/kc/kc-init.sh ]] && source ${PLUGINS_DIR}/kc/kc-init.sh || echoerr "kc init failed"
 
 # powerlevel10k
 [[ -f ${HELPERS_DIR}/powerlevel10k.zsh ]] && source ${HELPERS_DIR}/powerlevel10k.zsh || echoerr "cannot load powerlevel10k"
