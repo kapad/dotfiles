@@ -32,6 +32,16 @@ zcomp_reset() {
     rm -f ${ZHOME}/.zcompdump
 }
 
+# deletes all the files in $HOME/.zsh_cache - which is the zsh cache directory.
+zsh_cache_reset() {
+ rm -rf ${HOME}/.zsh_cache/*
+}
+
+# deletes all the files in $HOME/.zsh_cache - which is the zsh cache directory.
+p10k_cache_reset() {
+ rm -rf ${HOME}/.cache/p10k*
+}
+
 # some functions ripped from: https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/functions.zsh
 function open_command() {
   local open_cmd

@@ -51,6 +51,8 @@ alias hs='history | grep'
 alias hsi='history | grep -i'
 
 alias k="kubectl"
+alias kctx="kubectl-ctx"
+alias kns="kubectl-ns"
 
 ###########################
 ########## Notes ##########

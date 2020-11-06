@@ -62,6 +62,14 @@ bindkey -M vicmd "^I" expand-or-complete-with-dots
 # automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
 
+# kubectl-ctx and kubectl-ns
+autoload -U -z +X _kubectx
+autoload -U -z +X _kubens
+compdef _kubectx 'kubectl-ctx'
+compdef kctx='kubectl-ctx'
+compdef _kubens 'kubectl-ns'
+compdef kns='kubectl-ns'
+
 
 #######################################################################################################################
 # Notes
