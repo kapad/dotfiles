@@ -1,3 +1,6 @@
+# typing aliases should print all the set aliases
+alias aliases='alias'
+
 # ls
 alias ls="ls -A" # change the default behaviour to print "almost all".
 alias l="ls -1A" # print 1 file per line, almost all files

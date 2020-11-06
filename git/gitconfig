@@ -8,14 +8,16 @@
 [alias]
   lgsummary = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
   pushup = "!git push --set-upstream origin $(git symbolic-ref --short HEAD)"
+  pullf = "pull --force"
 
 [push]
   default = upstream
 
 # to use the osxkeychain as the credential helper
-# [credential]
-#   helper = osxkeychain
+[credential]
+  helper = osxkeychain
 
 # to rewrite all https git clones as ssh
+# Walmart VPN configs don't allow ssh access to github. Therefore, commented out for now. 
 # [url "git@github.com:"]
 #   insteadOf = https://github.com/

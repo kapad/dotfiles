@@ -36,7 +36,7 @@ __check_defined = \
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
 
-$(call check_defined, HOME, User's home directory)
+$(call check_defined, HOME, "User's home directory")
 
 # .PHONY install
 # install: 
@@ -59,13 +59,15 @@ link:
 	@ln -sf ${current_dir}/shell/plugins ${HOME}/.plugins
 	@echo 'Created ${HOME}/.plugins'
 	@ln -sf ${current_dir}/shell/helpers ${HOME}/.helpers
-	@echo 'Created ${HOME}/.helpers'
+	@ln -sf ${current_dir}/git/gitconfig ${HOME}/.gitconfig
+	@echo 'Created ${HOME}/.gitconfig'
 
 .PHONY: unlink
 unlink:
 	@rm -f ${HOME}/.zshrc
 	@rm -f ${HOME}/.plugins
 	@rm -f ${HOME}/.helpers
+	@rm -f ${HOME}/.gitconfig
 	@echo "Unlinked all files"
 
 # .PHONY: configure
