@@ -50,15 +50,26 @@ ZSH_CACHE_DIR=${HOME}/.zsh_cache
 
 # Setup PATH
 # Always prefer binaries managed by brew to binaryies managed by Apple.
-# `pathmunge <path>`` will add <path> to the start of $PATH. The first path to be searched should be munged last.
-# `pathmunge <path> after` will add <path> to the end of $PATH. The last path to search should be munged last.
+# `pathmunge <path>` will add <path> to the end of $PATH.
+# `pathmunge <path> before` will add <path> to the start of $PATH. Use sparingly.
 # TODO: Separate this out for root and non root. For root, it's better to use Apple's binaries (if available).
-[[ -d /usr/local/opt/python@3.7/libexec/bin ]] && pathmunge /usr/local/opt/python@3.7/libexec/bin || echoerr "PATH not configured for python@3.7"
+
+# Reset PATH
+PATH=''
+# Add to PATH. 
+[[ -d ${HOME}/bin ]] && pathmunge ${HOME}/bin || echoerr "PATH not configured for $HOME local binaries"
+[[ -d ${BREW_HOME}/bin ]] && pathmunge ${BREW_HOME}/bin || echoerr "PATH not configured for homebrew"
+[[ -d ${BREW_HOME}/opt/coreutils/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/coreutils/libexec/gnubin || echoerr "PATH not configured for coreutils"
+[[ -d /usr/local/opt/make/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/make/libexec/gnubin || echoerr "PATH not setup for GNU Make"
+[[ -d ${BREW_HOME}/opt/python@3.8/libexec/bin ]] && pathmunge ${BREW_HOME}/opt/python@3.8/libexec/bin || echoerr "PATH not configured for python@3.8"
+# MacOS defaults
+[[ -d /usr/bin ]] && pathmunge /usr/bin || echoerr "PATH not configured for /usr/bin"
+[[ -d /bin ]] && pathmunge /bin || echoerr "PATH not configured for /bin"
+[[ -d /usr/sbin ]] && pathmunge /usr/sbin || echoerr "PATH not configured for /usr/sbin"
+[[ -d /sbin ]] && pathmunge /sbin || echoerr "PATH not configured for /sbin"
+# additional PATH directories
 [[ -d ${HOME}/go/bin ]] && pathmunge ${HOME}/go/bin || echoerr "PATH not configured for go binaries"
 [[ -d ${HOME}/.krew/bin ]] && pathmunge ${HOME}/.krew/bin || echoerr "PATH not configured for krew"
-[[ -d ${BREW_HOME}/opt/coreutils/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/coreutils/libexec/gnubin || echoerr "PATH not configured for coreutils"
-[[ -d ${BREW_HOME}/bin ]] && pathmunge ${BREW_HOME}/bin || echoerr "PATH not configured for homebrew"
-[[ -d ${HOME}/bin ]] && pathmunge ${HOME}/bin || echoerr "PATH not configured for $HOME local binaries"
 
 # modules
 zmodload zsh/complist

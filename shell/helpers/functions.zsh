@@ -8,17 +8,20 @@
 # The pathmunge function that is a part of Fedora/CentOS dotfiles. Copied from CentOS sources.
 # Unlike the source code in CentOS, this function isn't disabled after being used in my dotfiles.
 # Usage:
-# `pathmunge <path>`` to add <path> to the start of $PATH.
-# `pathmunge <path> after` to add <path> to the end of $PATH.
+# `pathmunge <path>` to add <path> to the end of $PATH.
+# `pathmunge <path> before` to add <path> to the start of $PATH.
+# 
+# Note: 
+#   This function will not add <path> if it is already in the $PATH, regardless of the order.
 pathmunge () {
     case ":${PATH}:" in
         *:"$1":*)
             ;;
         *)
-            if [ "$2" = "after" ] ; then
-                PATH=$PATH:$1
-            else
+            if [ "$2" = "before" ] ; then
                 PATH=$1:$PATH
+            else
+                [[ -z $PATH ]] && PATH=$1 || PATH=$PATH:$1
             fi
     esac
 }
