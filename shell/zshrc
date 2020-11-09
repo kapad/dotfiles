@@ -71,10 +71,14 @@ zmodload zsh/complist
 # TODO - fix the keybindings. What's happening under the hood (macos, iterm, zle, etc)? 
 # [[ -f ${HELPERS_DIR}/keybindings.zsh ]] && source ${HELPERS_DIR}/keybindings.zsh || echoerr "Unable to load keybindings"
 
+# dircolors
+# solarized dircolors for ls
+eval `dircolors ${PLUGINS_DIR}/dircolors-solarized/dircolors.256dark`
+
 # completion
 # zcomp_reset: function to delete the dump file.
 # add helpers/completion to the fpath.
-# I'm explicitly autoloading completions whereever I need them.
+# I'm explicitly autoloading completions where ever I need them.
 # fpath=(${HELPERS_DIR}/completion $fpath) # defines the helper functions
 autoload -U -z compinit 
 compinit -C -d ${ZSH_CACHE_DIR}/.zcompdump
@@ -131,6 +135,12 @@ KC_ITERM_USER_VAR=0
 # python
 [[ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]] && source /usr/local/bin/virtualenvwrapper_lazy.sh || echoerr "virtualenvwrapper not found"
 
+# setup $LSCOLORS
+# export LSCOLORS="Gxfxcxdxbxegedabagacad"
+
+# walmart specific
+source ${HELPERS_DIR}/custom_zshrc.zsh
+
 # powerlevel10k
 [[ -f ${HELPERS_DIR}/powerlevel10k.zsh ]] && source ${HELPERS_DIR}/powerlevel10k.zsh || echoerr "cannot load powerlevel10k"
 [[ -f ${PLUGINS_DIR}/powerlevel10k/powerlevel10k.zsh-theme ]] && source ${PLUGINS_DIR}/powerlevel10k/powerlevel10k.zsh-theme || echoerr 'powerlevel10k init failed'
@@ -149,11 +159,13 @@ KC_ITERM_USER_VAR=0
 
 #######################################################################################################################
 # Cleanup
+# =======
+# Skipping this for now so that functions using these vars work as expected.
 #######################################################################################################################
-unset BREW_HOME
-unset PLUGINS_DIR
-unset HELPERS_DIR
-unset ZSH_CACHE_DIR
+# unset BREW_HOME
+# unset PLUGINS_DIR
+# unset HELPERS_DIR
+# unset ZSH_CACHE_DIR
 
 
 #######################################################################################################################

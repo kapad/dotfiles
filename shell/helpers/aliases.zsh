@@ -2,11 +2,11 @@
 alias aliases='alias'
 
 # ls
-alias ls="ls -A" # change the default behaviour to print "almost all".
-alias l="ls -1A" # print 1 file per line, almost all files
-alias ll="ls -lAh" # print long form, almost all, humar readable.
-alias lll='ls -lah' # print long form, all, human readable
-alias lt='ls -lAtrh' # print long form, almost all, ordered by time modified (oldest first) and human readable
+alias ls="ls -A --classify --color=auto" # change the default behaviour to print "almost all".
+alias l="ls -1A --classify --color=auto" # print 1 file per line, almost all files
+alias ll="ls -lAh --classify --color=auto" # print long form, almost all, humar readable.
+alias lll="ls -lah --classify --color=auto" # print long form, all, human readable
+alias lt="ls -lAtrh --classify --color=auto" # print long form, almost all, ordered by time modified (oldest first) and human readable
 
 # safer commands. add the "-i" option by default to cp, mv and rm.
 alias rm='rm -I'
