@@ -1,3 +1,5 @@
+#compdef kubectx
+
 local KUBECTX="${HOME}/.kube/kubectx"
 PREV=""
 

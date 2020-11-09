@@ -1,5 +1,6 @@
 # ripped from oh-my-zsh: https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/completion.zsh
 # fixme - the load process here seems a bit bizarre
+# WARN: take care not to add any compdef lines here because that would risk startup time.
 zmodload -i zsh/complist
 
 WORDCHARS=''
@@ -55,9 +56,9 @@ expand-or-complete-with-dots() {
 }
 zle -N expand-or-complete-with-dots
 # Set the function as the default tab completion widget
-bindkey -M emacs "^I" expand-or-complete-with-dots
-bindkey -M viins "^I" expand-or-complete-with-dots
-bindkey -M vicmd "^I" expand-or-complete-with-dots
+# bindkey -M emacs "^I" expand-or-complete-with-dots
+# bindkey -M viins "^I" expand-or-complete-with-dots
+# bindkey -M vicmd "^I" expand-or-complete-with-dots
 
 # automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
@@ -74,11 +75,11 @@ autoload -U +X bashcompinit && bashcompinit
 # compdef kctx='kubectl-ctx'
 # compdef _kubens 'kubectl-ns'
 # compdef kns='kubectl-ns'
-autoload -U -z +X ${HELPERS_DIR}/completion/_kubectl.zsh
-compdef _kubectl.zsh kubectl
+# autoload -U -z +X ${HELPERS_DIR}/completion/_kubectl.zsh
+# compdef _kubectl.zsh kubectl
 # kc
-autoload -U -z +X ${PLUGINS_DIR}/kc/completion/kc.zsh
-compdef kc.zsh kc
+# autoload -U -z +X ${PLUGINS_DIR}/kc/completion/kc.zsh
+# compdef kc.zsh kc
 # kubech
 
 

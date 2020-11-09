@@ -36,6 +36,10 @@ __check_defined = \
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
 
+completions_dir := /usr/local/share/zsh/site-functions
+plugins_dir := ${HOME}/.plugins
+helpers_dir := ${HOME}/.helpers
+
 $(call check_defined, HOME, "User's home directory")
 
 # .PHONY install
@@ -52,16 +56,26 @@ $(call check_defined, HOME, "User's home directory")
 # 	@curl -L git.io/antigen > ${HOME}/bin/antigen.zsh
 # 	@echo "Installed antigen"
 
+.PHONY: link-completion
+link-completion:
+	@ln -sf ${helpers_dir}/completion/kubectl.zsh ${completions_dir}/_kubectl
+	@ln -sf ${plugins_dir}/kc/completion/kc.zsh ${completions_dir}/_kc
+	@ln -sf ${helpers_dir}/completion/sledge.zsh ${completions_dir}/_sledge
+	@ln -sf ${helpers_dir}/completion/docker.zsh ${completions_dir}/_docker
+	@ln -sf ${helpers_dir}/completion/docker-compose.zsh ${completions_dir}/_docker-compose
+	@echo 'Linked completion scripts'
+
 .PHONY: link
 link:
 	@ln -sf ${current_dir}/shell/zshrc ${HOME}/.zshrc
 	@echo 'Created ${HOME}/.zshrc'
-	@ln -sf ${current_dir}/shell/plugins ${HOME}/.plugins
-	@echo 'Created ${HOME}/.plugins'
-	@ln -sf ${current_dir}/shell/helpers ${HOME}/.helpers
-	@echo 'Created ${HOME}/.helpers'
+	@ln -sf ${current_dir}/shell/plugins ${plugins_dir}
+	@echo 'Created ${plugins_dir}'
+	@ln -sf ${current_dir}/shell/helpers ${helpers_dir}
+	@echo 'Created ${helpers_dir}'
 	@ln -sf ${current_dir}/git/gitconfig ${HOME}/.gitconfig
 	@echo 'Created ${HOME}/.gitconfig'
+	@$(MAKE) -s link-completion
 
 .PHONY: unlink
 unlink:
