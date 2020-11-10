@@ -149,6 +149,9 @@ KC_ITERM_USER_VAR=0
 # setup $LSCOLORS
 # export LSCOLORS="Gxfxcxdxbxegedabagacad"
 
+# direnv
+source ${HELPERS_DIR}/direnv.zsh
+
 # walmart specific
 source ${HELPERS_DIR}/custom_zshrc.zsh
 
