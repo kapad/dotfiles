@@ -42,9 +42,9 @@ helpers_dir := ${HOME}/.helpers
 
 $(call check_defined, HOME, "User's home directory")
 
-# .PHONY install
-# install: 
-# 	@#todo
+.PHONY: install
+install: 
+	@$(MAKE) -s ${HOME}/bin/cheat
 
 # .PHONY system-install
 # system-install:
@@ -58,11 +58,12 @@ $(call check_defined, HOME, "User's home directory")
 
 .PHONY: link-completion
 link-completion:
-	@ln -sf ${helpers_dir}/completion/kubectl.zsh ${completions_dir}/_kubectl
-	@ln -sf ${plugins_dir}/kc/completion/kc.zsh ${completions_dir}/_kc
-	@ln -sf ${helpers_dir}/completion/sledge.zsh ${completions_dir}/_sledge
+	@ln -sf ${helpers_dir}/completion/cheat.zsh ${completions_dir}/_cheat
 	@ln -sf ${helpers_dir}/completion/docker.zsh ${completions_dir}/_docker
 	@ln -sf ${helpers_dir}/completion/docker-compose.zsh ${completions_dir}/_docker-compose
+	@ln -sf ${helpers_dir}/completion/kubectl.zsh ${completions_dir}/_kubectl
+	@ln -sf ${helpers_dir}/completion/sledge.zsh ${completions_dir}/_sledge
+	@ln -sf ${plugins_dir}/kc/completion/kc.zsh ${completions_dir}/_kc
 	@echo 'Linked completion scripts'
 
 .PHONY: link
@@ -84,6 +85,11 @@ unlink:
 	@rm -f ${HOME}/.helpers
 	@rm -f ${HOME}/.gitconfig
 	@echo "Unlinked all files"
+
+${HOME}/bin/cheat:
+	@curl -sL https://github.com/cheat/cheat/releases/download/4.1.1/cheat-darwin-amd64.gz | gunzip -d > ${HOME}/bin/cheat
+	@chmod +x ${HOME}/bin/cheat
+	@echo "Installed cheat v4.1.1"
 
 # .PHONY: configure
 # configure:

@@ -43,3 +43,9 @@
 [submodule "shell/plugins/dircolors-solarized"]
 	path = shell/plugins/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized.git
+[submodule "shell/plugins/cheatsheets"]
+	path = shell/plugins/cheatsheets
+	url = https://github.com/cheat/cheatsheets.git
+[submodule "shell/plugins/cheats"]
+	path = shell/plugins/cheats
+	url = https://github.com/kapad/cheats.git

@@ -39,10 +39,12 @@ HISTSIZE=10000 # Set much larger than SAVEHIST
 SAVEHIST=2000 # Size of histoy per session. Does it matter because SHARE_HISTORY has already been set.
 
 # vars
-BREW_HOME=$(/usr/local/bin/brew --prefix) # this needs to be full path, because we still haven't setup PATH
-PLUGINS_DIR=${HOME}/.plugins
-HELPERS_DIR=${HOME}/.helpers
-ZSH_CACHE_DIR=${HOME}/.zsh_cache
+export BREW_HOME=$(/usr/local/bin/brew --prefix) # this needs to be full path, because we still haven't setup PATH
+export PLUGINS_DIR=${HOME}/.plugins
+export HELPERS_DIR=${HOME}/.helpers
+export ZSH_CACHE_DIR=${HOME}/.zsh_cache
+export CHEAT_CONFIG_PATH=${HELPERS_DIR}/cheat.yml
+export CHEAT_USE_FZF=true
 
 # Source all functions. Needs to be done before setting the PATH because that uses pathmunge from .functions
 # echoerr is a part of functions and cannot be used here. 
