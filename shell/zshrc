@@ -79,6 +79,7 @@ PATH=''
 # additional PATH directories
 [[ -d ${HOME}/go/bin ]] && pathmunge ${HOME}/go/bin || echoerr "PATH not configured for go binaries"
 [[ -d ${HOME}/.krew/bin ]] && pathmunge ${HOME}/.krew/bin || echoerr "PATH not configured for krew"
+# [[ -d ${HOME}/.helmenv/bin ]] && pathmunge ${HOME}/.helmenv/bin || echoerr "PATH not configured for helmenv"
 
 # modules
 zmodload zsh/complist

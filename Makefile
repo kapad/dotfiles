@@ -76,6 +76,8 @@ link:
 	@echo 'Created ${helpers_dir}'
 	@ln -sf ${current_dir}/git/gitconfig ${HOME}/.gitconfig
 	@echo 'Created ${HOME}/.gitconfig'
+# 	@ln -sf ${plugins_dir}/helmenv ${HOME}/.helmenv
+# 	@echo 'Created ${HOME}/.helmenv'
 	@$(MAKE) -s link-completion
 
 .PHONY: unlink
