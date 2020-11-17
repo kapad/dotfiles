@@ -21,6 +21,7 @@
   default = upstream
 
 # to use the osxkeychain as the credential helper
+# !check
 [credential]
   helper = osxkeychain
 
