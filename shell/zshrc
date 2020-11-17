@@ -142,8 +142,8 @@ FZ_SUBDIR_CMD='jj'
 [[ -f ${HELPERS_DIR}/thefuck.zsh ]] && source ${HELPERS_DIR}/thefuck.zsh || echoerr "the fuck init failed"
 
 # helpers
-[[ -f ${HELPERS_DIR}/git.zsh ]] && source ${HELPERS_DIR}/git.zsh || echoerr "cannot load git helper"
-[[ -f ${HELPERS_DIR}/grep.zsh ]] && source ${HELPERS_DIR}/grep.zsh || echoerr "cannot load grep helper"
+# [[ -f ${HELPERS_DIR}/git.zsh ]] && source ${HELPERS_DIR}/git.zsh || echoerr "cannot load git helper"
+# [[ -f ${HELPERS_DIR}/grep.zsh ]] && source ${HELPERS_DIR}/grep.zsh || echoerr "cannot load grep helper"
 
 # aliases
 [[ -f ${HELPERS_DIR}/aliases.zsh ]] && source ${HELPERS_DIR}/aliases.zsh || echoerr "cannot load aliases"

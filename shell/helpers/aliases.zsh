@@ -19,11 +19,11 @@ alias duf='du -sh *' # disk utilization for all files and directories
 alias findd='find . -type d -iname' # find file by name (case-insensitive)
 alias findf='find . -type f -iname' # find directory by name (case insensitive)
 
-# sugar
-# alias grep='grep --color'
-# alias egrep='egrep --color'
-alias -g E2OUT='2>&1'
-alias yqc='yq -PC r -'
+# grep, egrep and fgrep
+__GREP_OPTIONS="--color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}"
+alias grep="grep ${__GREP_OPTIONS}"
+alias egrep="egrep ${__GREP_OPTIONS}"
+alias fgrep="fgrep ${__GREP_OPTIONS}"
 
 # fasd aliases
 # I'm not using any of the other aliases, but they are commonly defined for shell jumping.
@@ -47,12 +47,21 @@ alias zz='z'
 
 # history
 alias h='history'
-alias hs='history | grep'
-alias hsi='history | grep -i'
+alias hs='history | grep -i --color'
 
+# git
+alias g='git'
+
+# kubernetes
 alias k="kubectl"
 alias kctx="kubectl-ctx"
 alias kns="kubectl-ns"
+
+# sugar
+# alias grep='grep --color'
+# alias egrep='egrep --color'
+alias -g E2OUT='2>&1'
+alias yqc='yq -PC r -'
 
 ###########################
 ########## Notes ##########
