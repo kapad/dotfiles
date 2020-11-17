@@ -1,6 +1,7 @@
 _direnv_hook() {
   trap -- '' SIGINT;
-  eval "$("/usr/local/bin/direnv" export zsh)";
+  # redirect the STDERR so that powerlevel10k instant prompt doesn't complain.
+  eval "$("/usr/local/bin/direnv" export zsh 2>/dev/null)";
   trap - SIGINT;
 }
 typeset -ag precmd_functions;
