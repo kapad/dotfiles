@@ -1,26 +1,26 @@
-#######################################################################################################################
+########################################################################################################################
 # Optional startup
 # ################
 # This section should be very light. For eg, the profiler has to be one of the first mods loaded so that it is able 
 # to profile everything else. Another use case would be to set some options to debug this rc script.
-#######################################################################################################################
+########################################################################################################################
 # profiling to ensure that the prompt is always fast!!
 zmodload zsh/zprof # profiler - disable once the dotfiles are stable and fast
 
-#######################################################################################################################
+########################################################################################################################
 # p10k instant prompt
 # ###################
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-#######################################################################################################################
+########################################################################################################################
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-#######################################################################################################################
+########################################################################################################################
 # Setup
-#######################################################################################################################
+########################################################################################################################
 # Z shell configuration options
 # Adopted from the section below regarding the default configuration for a Mac.
 if [[ "$(locale LC_CTYPE)" == "UTF-8" ]]; then
@@ -85,9 +85,9 @@ PATH=''
 zmodload zsh/complist
 
 
-#######################################################################################################################
+########################################################################################################################
 # Init
-#######################################################################################################################
+########################################################################################################################
 # keybindings
 # TODO - fix the keybindings. What's happening under the hood (macos, iterm, zle, etc)? 
 # [[ -f ${HELPERS_DIR}/keybindings.zsh ]] && source ${HELPERS_DIR}/keybindings.zsh || echoerr "Unable to load keybindings"
@@ -171,31 +171,31 @@ source ${HELPERS_DIR}/custom_zshrc.zsh
 # To customize prompt, edit helpers/powerlevel10k.zsh
 
 
-#######################################################################################################################
+########################################################################################################################
 # syntax highlighting
 # NOTE: This needs to be kept at the end of this file.
-#######################################################################################################################
+########################################################################################################################
 # [[ -f ${PLUGINS_DIR}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && \
 #                             source ${PLUGINS_DIR}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -f ${PLUGINS_DIR}/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ]] && \
         source ${PLUGINS_DIR}/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh || echoerr "syntax highlighting init failed"
 
 
-#######################################################################################################################
+########################################################################################################################
 # Cleanup
 # =======
 # Skipping this for now so that functions using these vars work as expected.
-#######################################################################################################################
+########################################################################################################################
 # unset BREW_HOME
 # unset PLUGINS_DIR
 # unset HELPERS_DIR
 # unset ZSH_CACHE_DIR
 
 
-#######################################################################################################################
+########################################################################################################################
 # Everthing in this sections is a part of the default zsh that shipped with MacOS. This has been retained only for
 # reference. Wherever needed, I've copied the relavant portions from below and retained them.
-#######################################################################################################################
+########################################################################################################################
 # System-wide profile for interactive zsh(1) shells.
 
 # Setup user specific overrides for this in ~/.zshrc. See zshbuiltins(1)

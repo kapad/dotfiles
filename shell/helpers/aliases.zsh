@@ -54,8 +54,8 @@ alias g='git'
 
 # kubernetes
 alias k="kubectl"
-alias kctx="kubectl-ctx"
-alias kns="kubectl-ns"
+alias kctx="kubectl ctx"
+alias kns="kubectl ns"
 
 # sugar
 # alias grep='grep --color'
