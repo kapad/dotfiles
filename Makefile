@@ -76,6 +76,8 @@ link:
 	@echo 'Created ${helpers_dir}'
 	@ln -sf ${current_dir}/git/gitconfig ${HOME}/.gitconfig
 	@echo 'Created ${HOME}/.gitconfig'
+	@ln -sf ${current_dir}/git/global_gitignore ${HOME}/.global_gitignore
+	@echo 'Created ${HOME}/.global_gitignore'
 # 	@ln -sf ${plugins_dir}/helmenv ${HOME}/.helmenv
 # 	@echo 'Created ${HOME}/.helmenv'
 	@$(MAKE) -s link-completion
@@ -86,6 +88,7 @@ unlink:
 	@rm -f ${HOME}/.plugins
 	@rm -f ${HOME}/.helpers
 	@rm -f ${HOME}/.gitconfig
+	@rm -f ${HOME}/.global_gitignore
 	@echo "Unlinked all files"
 
 ${HOME}/bin/cheat:

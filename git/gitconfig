@@ -29,6 +29,9 @@
 [push]
   default = upstream
 
+[core]
+  excludesfile = "~/.global_gitignore"
+
 # to use the osxkeychain as the credential helper
 # !check
 [credential]
@@ -38,3 +41,6 @@
 # Walmart VPN configs don't allow ssh access to github. Therefore, commented out for now. 
 # [url "git@github.com:"]
 #   insteadOf = https://github.com/
+
+[includeIf "gitdir:~/projects/walmart/"]
+    path = ~/projects/walmart/.gitconfig
