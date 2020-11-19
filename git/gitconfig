@@ -14,7 +14,12 @@
 [alias]
   # sugar
   s="status"
+  c="checkout"
+  cb="checkout -b"
+  cbt="checkout --track -b"
+  a="add"
   fo="fetch origin"
+  fop="fetch origin --prune"
   pushup = "!git push --set-upstream origin $(git symbolic-ref --short HEAD)"
   pullf = "pull --force"
   
