@@ -13,6 +13,8 @@
 
 [alias]
   # sugar
+  b="branch"
+  ba="branch -a"
   s="status"
   c="checkout"
   cb="checkout -b"
@@ -20,8 +22,9 @@
   a="add"
   fo="fetch origin"
   fop="fetch origin --prune"
-  pushup = "!git push --set-upstream origin $(git symbolic-ref --short HEAD)"
-  pullf = "pull --force"
+  pushup="!git push --set-upstream origin $(git symbolic-ref --short HEAD)"
+  pushf="push --force"
+  pullf="pull --force"
   
   # graph
   lgsummary = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -30,7 +33,7 @@
   default = upstream
 
 [core]
-  excludesfile = "~/.global_gitignore"
+  excludesFile = "~/.global_gitignore"
 
 # to use the osxkeychain as the credential helper
 # !check
