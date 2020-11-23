@@ -52,6 +52,10 @@ alias hs='history | grep -i --color'
 # git
 alias g='git'
 
+# docker
+alias d="docker"
+alias dc="docker-compose"
+
 # kubernetes
 alias k="kubectl"
 alias kctx="kubectl ctx"
