@@ -16,6 +16,7 @@
   b="branch"
   ba="branch -a"
   s="status"
+  d="diff"
   c="checkout"
   cb="checkout -b"
   cbt="checkout --track -b"
