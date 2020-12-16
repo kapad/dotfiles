@@ -163,7 +163,8 @@ KC_ITERM_USER_VAR=0
 source ${HELPERS_DIR}/direnv.zsh
 
 # walmart specific
-source ${HELPERS_DIR}/custom_zshrc.zsh
+# source ${HELPERS_DIR}/custom_zshrc.zsh
+[[ -d ${HOME}/.sledge/bin ]] && pathmunge ${HOME}/.sledge/bin || echoerr "PATH not configured for sledge"
 
 # powerlevel10k
 [[ -f ${HELPERS_DIR}/powerlevel10k.zsh ]] && source ${HELPERS_DIR}/powerlevel10k.zsh || echoerr "cannot load powerlevel10k"
