@@ -52,6 +52,12 @@ cheatpaths:
     tags: [ community ]
     readonly: true
 
+  # Work specific cheat files. 
+  - name: work
+    path: /Users/r0k02nk/.work/cheatsheets
+    tags: [ work ]
+    readonly: false
+
   # If you have personalized cheatsheets, list them last. They will take
   # precedence over the more global cheatsheets.
   - name: personal

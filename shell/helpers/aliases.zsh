@@ -61,11 +61,15 @@ alias k="kubectl"
 alias kctx="kubectl ctx"
 alias kns="kubectl ns"
 
+# copy paste
+alias c=pbcopy
+alias v=pbpaste
+
 # sugar
 # alias grep='grep --color'
 # alias egrep='egrep --color'
 alias -g E2OUT='2>&1'
-alias yqc='yq -PC r -'
+alias yqc='yq -PC e -'
 
 ###########################
 ########## Notes ##########

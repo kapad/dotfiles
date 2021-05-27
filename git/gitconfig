@@ -19,12 +19,14 @@
   d="diff"
   c="checkout"
   cb="checkout -b"
+  cub="checkout "
   cbt="checkout --track -b"
   a="add"
   fo="fetch origin"
   fop="fetch origin --prune"
   pushup="!git push --set-upstream origin $(git symbolic-ref --short HEAD)"
   pushf="push --force"
+  pushd="push --delete"
   pullf="pull --force"
   
   # graph
@@ -48,3 +50,9 @@
 
 [includeIf "gitdir:~/projects/walmart/"]
     path = ~/projects/walmart/.gitconfig
+
+[includeIf "gitdir:~/projects/ghe/"]
+    path = ~/projects/ghe/.gitconfig
+
+[url "git@gecgithub01.walmart.com:"]
+	insteadOf = https://gecgithub01.walmart.com/

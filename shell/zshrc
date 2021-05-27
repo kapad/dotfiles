@@ -38,6 +38,10 @@ HISTFILE=${HOME}/.zsh_history # This is the default. explicit > implicit.
 HISTSIZE=10000 # Set much larger than SAVEHIST
 SAVEHIST=2000 # Size of histoy per session. Does it matter because SHARE_HISTORY has already been set.
 
+# EDITOR
+# export EDITOR="vim"
+export KUBE_EDITOR="vim"
+
 # vars
 export BREW_HOME=$(/usr/local/bin/brew --prefix) # this needs to be full path, because we still haven't setup PATH
 export PLUGINS_DIR=${HOME}/.plugins
@@ -156,6 +160,10 @@ KC_ITERM_USER_VAR=0
 # python
 [[ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]] && source /usr/local/bin/virtualenvwrapper_lazy.sh || echoerr "virtualenvwrapper not found"
 
+# node
+# installed and manged using nodenv: https://github.com/nodenv/nodenv
+command_exists nodenv && source ${HELPERS_DIR}/nodenv.zsh || ( command_exists nodenv && echoerr "nodenv is installed but helper not found" || echoerr "nodenv not found")
+
 # setup $LSCOLORS
 # export LSCOLORS="Gxfxcxdxbxegedabagacad"
 
@@ -164,7 +172,11 @@ source ${HELPERS_DIR}/direnv.zsh
 
 # walmart specific
 # source ${HELPERS_DIR}/custom_zshrc.zsh
+# TODO: Move this to the work dotfiles. 
 [[ -d ${HOME}/.sledge/bin ]] && pathmunge ${HOME}/.sledge/bin || echoerr "PATH not configured for sledge"
+
+# work dotfiles. 
+[[ -f ${HELPERS_DIR}/work.zsh ]] && source ${HELPERS_DIR}/work.zsh
 
 # powerlevel10k
 [[ -f ${HELPERS_DIR}/powerlevel10k.zsh ]] && source ${HELPERS_DIR}/powerlevel10k.zsh || echoerr "cannot load powerlevel10k"

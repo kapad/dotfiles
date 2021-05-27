@@ -85,6 +85,10 @@ function kube_toggle() {
   fi
 }
 
+function command_exists() {
+    (( $+commands[$1] ))
+}
+
 #
 # Get the value of an alias.
 #
