@@ -96,6 +96,14 @@ zmodload zsh/complist
 # TODO - fix the keybindings. What's happening under the hood (macos, iterm, zle, etc)? 
 # [[ -f ${HELPERS_DIR}/keybindings.zsh ]] && source ${HELPERS_DIR}/keybindings.zsh || echoerr "Unable to load keybindings"
 
+# walmart specific
+# source ${HELPERS_DIR}/custom_zshrc.zsh
+# TODO: Move this to the work dotfiles. 
+[[ -d ${HOME}/.sledge/bin ]] && pathmunge ${HOME}/.sledge/bin || echoerr "PATH not configured for sledge"
+
+# work dotfiles. 
+[[ -d ${HOME}/.work ]] && source ${HELPERS_DIR}/work.zsh
+
 # dircolors
 # solarized dircolors for ls
 eval `dircolors ${PLUGINS_DIR}/dircolors-solarized/dircolors.256dark`
@@ -169,14 +177,6 @@ command_exists nodenv && source ${HELPERS_DIR}/nodenv.zsh || ( command_exists no
 
 # direnv
 source ${HELPERS_DIR}/direnv.zsh
-
-# walmart specific
-# source ${HELPERS_DIR}/custom_zshrc.zsh
-# TODO: Move this to the work dotfiles. 
-[[ -d ${HOME}/.sledge/bin ]] && pathmunge ${HOME}/.sledge/bin || echoerr "PATH not configured for sledge"
-
-# work dotfiles. 
-[[ -f ${HELPERS_DIR}/work.zsh ]] && source ${HELPERS_DIR}/work.zsh
 
 # powerlevel10k
 [[ -f ${HELPERS_DIR}/powerlevel10k.zsh ]] && source ${HELPERS_DIR}/powerlevel10k.zsh || echoerr "cannot load powerlevel10k"

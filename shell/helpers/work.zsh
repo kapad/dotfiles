@@ -3,6 +3,6 @@
 # 2. ${HOME}/.work/functions.zsh
 # 3. ${HOME}/.work/completions.zsh
 
-[[ -f ${HOME}/.work/aliases.zsh ]] && source ${HOME}/.work/aliases.zsh
-[[ -f ${HOME}/.work/functions.zsh ]] && source ${HOME}/.work/functions.zsh
-[[ -f ${HOME}/.work/completions.zsh ]] && source ${HOME}/.work/completions.zsh
+[[ -f ${HOME}/.work/aliases.zsh ]] && source ${HOME}/.work/aliases.zsh || echoerr "Work dotfiles not loaded"
+[[ -f ${HOME}/.work/functions.zsh ]] && source ${HOME}/.work/functions.zsh || echoerr "Work dotfiles not loaded"
+[[ -f ${HOME}/.work/completions.zsh ]] && source ${HOME}/.work/completions.zsh || echoerr "Work dotfiles not loaded"
