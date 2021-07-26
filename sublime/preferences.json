@@ -1,0 +1,27 @@
+{
+    "font_face": "Roboto Mono Nerd Font",
+    "font_size": 14,
+    "highlight_line": true,
+    "ignored_packages":
+    [
+        "Vintage",
+    ],
+    "show_full_path": true,
+    "translate_tabs_to_spaces": true,
+
+    // Snippets will not be included in the auto complete when this is
+    // false. They can still be triggered by typing their tab trigger in, and
+    // pressing tab when auto complete is not showing.
+    "auto_complete_include_snippets": false,
+
+    // When this is set to false, snippets won't be present in the auto
+    // complete dialog when typing, instead they'll only be shown in the auto
+    // complete dialog when it's explicitly triggered
+    "auto_complete_include_snippets_when_typing": false,
+
+    // A list of wildcard patterns specifying which snippet files to ignore.
+    // For example, to ignore all the default C++ snippets, set this to
+    // ["C++/*"]
+    "ignored_snippets": [],
+    "theme": "Default Dark.sublime-theme",
+}

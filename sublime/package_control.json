@@ -1,0 +1,23 @@
+{
+    "bootstrapped": true,
+    "in_process_packages":
+    [
+    ],
+    "installed_packages":
+    [
+        "All Autocomplete",
+        "DocBlockr",
+        "DocBlockr_Python",
+        "EditorConfig",
+        "FindKeyConflicts",
+        "GitSavvy",
+        "Jinja2",
+        "MoveTab",
+        "Package Control",
+        "Pretty JSON",
+        "SideBarEnhancements",
+        "SublimeCodeIntel",
+        "TabsExtra",
+        "Terraform"
+    ],
+}

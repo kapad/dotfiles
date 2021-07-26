@@ -1,0 +1,13 @@
+[
+    { "keys": ["super+shift+k"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Line.sublime-macro"} },
+    {
+        "keys": ["super+alt+shift+["],
+        "command": "move_tab",
+        "args": { "position": "-1" }
+    },
+    {
+        "keys": ["super+alt+shift+]"],
+        "command": "move_tab",
+        "args": { "position": "+1" }
+    }
+]
