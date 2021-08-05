@@ -34,7 +34,7 @@ __check_defined = \
 	$(error Undefined $1$(if $2, ($2))))
 
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
-current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
+current_dir := $(patsubst %/,%,$(dir $(mkfile_path)))
 
 completions_dir := /usr/local/share/zsh/site-functions
 plugins_dir := ${HOME}/.zsh.d/plugins
@@ -44,7 +44,10 @@ $(call check_defined, HOME, "User's home directory")
 
 .PHONY: install
 install: 
+	@mkdir -p ${HOME}/bin
 	@$(MAKE) -s ${HOME}/bin/cheat
+	@$(MAKE) -s link
+
 
 # .PHONY system-install
 # system-install:
@@ -93,15 +96,6 @@ unlink:
 	@echo "Unlinked all files"
 
 ${HOME}/bin/cheat:
-	@curl -sL https://github.com/cheat/cheat/releases/download/4.1.1/cheat-darwin-amd64.gz | gunzip -d > ${HOME}/bin/cheat
+	@curl -sL https://github.com/cheat/cheat/releases/download/4.2.2/cheat-darwin-amd64.gz | gunzip -d > ${HOME}/bin/cheat
 	@chmod +x ${HOME}/bin/cheat
-	@echo "Installed cheat v4.1.1"
-
-# .PHONY: configure
-# configure:
-# 	@#todo
-
-
-# ifeq ($(strip $(HOME)),)
-# 	HOME:=
-# endif
+	@echo "Installed cheat v4.2.2"

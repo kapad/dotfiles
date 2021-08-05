@@ -44,8 +44,8 @@ export KUBE_EDITOR="vim"
 
 # vars
 export BREW_HOME=$(/usr/local/bin/brew --prefix) # this needs to be full path, because we still haven't setup PATH
-export PLUGINS_DIR=${HOME}/.plugins
-export HELPERS_DIR=${HOME}/.helpers
+export PLUGINS_DIR=${HOME}/.zsh.d/plugins
+export HELPERS_DIR=${HOME}/.zsh.d/helpers
 export ZSH_CACHE_DIR=${HOME}/.zsh_cache
 export CHEAT_CONFIG_PATH=${HELPERS_DIR}/cheat.yml
 export CHEAT_USE_FZF=true
