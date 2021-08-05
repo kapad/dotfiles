@@ -37,6 +37,3 @@
 [submodule "shell/plugins/cheats"]
 	path = shell/plugins/cheats
 	url = https://github.com/kapad/cheats.git
-[submodule "shell/plugins/helmenv"]
-	path = shell/plugins/helmenv
-	url = https://github.com/yuya-takeyama/helmenv.git
