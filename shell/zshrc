@@ -25,6 +25,7 @@ fi
 ########################################################################################################################
 # Z shell configuration options
 # Adopted from the section below regarding the default configuration for a Mac.
+########################################################################################################################
 if [[ "$(locale LC_CTYPE)" == "UTF-8" ]]; then
     setopt COMBINING_CHARS # required for proper rendering of UTF-8 characters
 fi
@@ -96,13 +97,8 @@ zmodload zsh/complist
 ########################################################################################################################
 # TODO - keybindings
 
-# walmart specific
-# source ${HELPERS_DIR}/custom_zshrc.zsh
-# TODO: Move this to the work dotfiles. 
-# [[ -d ${HOME}/.sledge/bin ]] && pathmunge ${HOME}/.sledge/bin || echoerr "PATH not configured for sledge"
-
 # work dotfiles. 
-[[ -d ${HOME}/.work ]] && source ${HELPERS_DIR}/work.zsh
+[[ -d ${WORK_DOTFILES_DIR} ]] && source ${HELPERS_DIR}/work.zsh
 
 # dircolors
 # solarized dircolors for ls

@@ -13,6 +13,7 @@ The default shell is zsh. This is also the only shell supported by these dotfile
 
 # TODOs
 
+* krew installation script: https://krew.sigs.k8s.io/docs/user-guide/setup/install/ 
 * Is my completion setup well? What's really happening under the hood?
 * Something like Karabiner. 
     * Setup the config. 

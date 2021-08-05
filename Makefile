@@ -56,7 +56,6 @@ link-completion:
 	@ln -sf ${helpers_dir}/completion/docker-compose.zsh ${completions_dir}/_docker-compose
 	@ln -sf ${plugins_dir}/kc/completion/kc.zsh ${completions_dir}/_kc
 	@ln -sf ${helpers_dir}/completion/kubectl.zsh ${completions_dir}/_kubectl
-	@ln -sf ${helpers_dir}/completion/sledge.zsh ${completions_dir}/_sledge
 	@echo 'Linked completion scripts'
 
 .PHONY: unlink-completion

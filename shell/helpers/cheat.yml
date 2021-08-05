@@ -48,20 +48,20 @@ cheatpaths:
   # Once downloaded, ensure that 'path' below points to the location at which
   # you downloaded the community cheatsheets.
   - name: community
-    path: /Users/r0k02nk/.plugins/cheatsheets
+    path: /Users/r0k02nk/.zsh.d/plugins/cheatsheets
     tags: [ community ]
     readonly: true
 
   # Work specific cheat files. 
   - name: work
-    path: /Users/r0k02nk/.work/cheatsheets
+    path: /Users/r0k02nk/.work.zsh.d/plugins/cheats
     tags: [ work ]
     readonly: false
 
   # If you have personalized cheatsheets, list them last. They will take
   # precedence over the more global cheatsheets.
   - name: personal
-    path: /Users/r0k02nk/.plugins/cheats
+    path: /Users/r0k02nk/.zsh.d/plugins/cheats
     tags: [ personal ]
     readonly: false
 
