@@ -48,11 +48,14 @@
 # [url "git@github.com:"]
 #   insteadOf = https://github.com/
 
-[includeIf "gitdir:~/projects/walmart/"]
-    path = ~/projects/walmart/.gitconfig
+# [includeIf "gitdir:~/projects/walmart/"]
+#     path = ~/projects/walmart/.gitconfig
 
-[includeIf "gitdir:~/projects/ghe/"]
-    path = ~/projects/ghe/.gitconfig
+# [includeIf "gitdir:~/projects/ghe/"]
+#     path = ~/projects/ghe/.gitconfig
 
-[url "git@gecgithub01.walmart.com:"]
-	insteadOf = https://gecgithub01.walmart.com/
+# [url "git@gecgithub01.walmart.com:"]
+# 	insteadOf = https://gecgithub01.walmart.com/
+
+[include]
+    path = ~/.work_gitconfig

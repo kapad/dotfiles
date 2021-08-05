@@ -1,3 +1,16 @@
+# Introduction
+
+These are my personal dotfiles. Currently the only supported system is macOS. 
+
+# Installation
+
+These dotfiles can be setup using Make. Not everything is automated yet. 
+`make install`
+
+# Shell
+
+The default shell is zsh. This is also the only shell supported by these dotfiles.
+
 # TODOs
 
 * Is my completion setup well? What's really happening under the hood?

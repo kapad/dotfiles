@@ -7,6 +7,7 @@
 # profiling to ensure that the prompt is always fast!!
 zmodload zsh/zprof # profiler - disable once the dotfiles are stable and fast
 
+
 ########################################################################################################################
 # p10k instant prompt
 # ###################
@@ -17,6 +18,7 @@ zmodload zsh/zprof # profiler - disable once the dotfiles are stable and fast
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
 
 ########################################################################################################################
 # Setup
@@ -39,7 +41,7 @@ HISTSIZE=10000 # Set much larger than SAVEHIST
 SAVEHIST=2000 # Size of histoy per session. Does it matter because SHARE_HISTORY has already been set.
 
 # EDITOR
-# export EDITOR="vim"
+export EDITOR="vim"
 export KUBE_EDITOR="vim"
 
 # vars
@@ -49,17 +51,17 @@ export HELPERS_DIR=${HOME}/.zsh.d/helpers
 export ZSH_CACHE_DIR=${HOME}/.zsh_cache
 export CHEAT_CONFIG_PATH=${HELPERS_DIR}/cheat.yml
 export CHEAT_USE_FZF=true
+export WORK_DOTFILES_DIR=${HOME}/.work.zsh.d
 
 # Source all functions. Needs to be done before setting the PATH because that uses pathmunge from .functions
 # echoerr is a part of functions and cannot be used here. 
 [[ -f ${HELPERS_DIR}/functions.zsh ]] && source ${HELPERS_DIR}/functions.zsh || printf "\e[31;1m%s\e[0m\n" "unable to load functions" >&2
 
 # Setup PATH
-# Always prefer binaries managed by brew to binaryies managed by Apple.
+# Always prefer binaries managed by brew to binaries managed by Apple.
 # `pathmunge <path>` will add <path> to the end of $PATH.
 # `pathmunge <path> before` will add <path> to the start of $PATH. Use sparingly.
 # TODO: Separate this out for root and non root. For root, it's better to use Apple's binaries (if available).
-
 # Reset PATH
 PATH=''
 # Add to PATH. 
@@ -74,7 +76,7 @@ PATH=''
 [[ -d ${BREW_HOME}/opt/findutils/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/findutils/libexec/gnubin || echoerr "PATH not setup for GNU findutils"
 [[ -d ${BREW_HOME}/opt/gnu-indent/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/gnu-indent/libexec/gnubin || echoerr "PATH not setup for GNU indent"
 [[ -d ${BREW_HOME}/opt/make/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/make/libexec/gnubin || echoerr "PATH not setup for GNU Make"
-[[ -d ${BREW_HOME}/opt/python/libexec/bin ]] && pathmunge ${BREW_HOME}/opt/python/libexec/bin || echoerr "PATH not configured for python@3.8"
+[[ -d ${BREW_HOME}/opt/python/libexec/bin ]] && pathmunge ${BREW_HOME}/opt/python/libexec/bin || echoerr "PATH not configured for python@3.x"
 # MacOS defaults
 [[ -d /usr/bin ]] && pathmunge /usr/bin || echoerr "PATH not configured for /usr/bin"
 [[ -d /bin ]] && pathmunge /bin || echoerr "PATH not configured for /bin"
@@ -92,14 +94,12 @@ zmodload zsh/complist
 ########################################################################################################################
 # Init
 ########################################################################################################################
-# keybindings
-# TODO - fix the keybindings. What's happening under the hood (macos, iterm, zle, etc)? 
-# [[ -f ${HELPERS_DIR}/keybindings.zsh ]] && source ${HELPERS_DIR}/keybindings.zsh || echoerr "Unable to load keybindings"
+# TODO - keybindings
 
 # walmart specific
 # source ${HELPERS_DIR}/custom_zshrc.zsh
 # TODO: Move this to the work dotfiles. 
-[[ -d ${HOME}/.sledge/bin ]] && pathmunge ${HOME}/.sledge/bin || echoerr "PATH not configured for sledge"
+# [[ -d ${HOME}/.sledge/bin ]] && pathmunge ${HOME}/.sledge/bin || echoerr "PATH not configured for sledge"
 
 # work dotfiles. 
 [[ -d ${HOME}/.work ]] && source ${HELPERS_DIR}/work.zsh
@@ -111,8 +111,8 @@ eval `dircolors ${PLUGINS_DIR}/dircolors-solarized/dircolors.256dark`
 # completion
 # zcomp_reset: function to delete the dump file.
 # add helpers/completion to the fpath.
-# I'm explicitly autoloading completions where ever I need them.
-# fpath=(${HELPERS_DIR}/completion $fpath) # defines the helper functions
+# I'm explicitly autoloading completions where ever I need them. 
+# Autoloading works because some custom command specific completions that are linked to the zsh's completion autoload directory.
 autoload -U -z compinit 
 compinit -C -d ${ZSH_CACHE_DIR}/.zcompdump
 [[ -f ${HELPERS_DIR}/completion.zsh ]] && source ${HELPERS_DIR}/completion.zsh || echoerr "unable to load completion helper"
@@ -128,20 +128,7 @@ unset HB_CNF_HANDLER
 # twf
 [[ -f ${HELPERS_DIR}/twf.zsh ]] && source ${HELPERS_DIR}/twf.zsh || echoerr "twf init failed"
 
-# fzf-tab
-[[ -f ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh ]] && source ${PLUGINS_DIR}/fzf-tab/fzf-tab.zsh || echoerr "fzf-tab init failed"
-[[ -f ${HELPERS_DIR}/fzf-tab.zsh ]] && source ${HELPERS_DIR}/fzf-tab.zsh || echoerr "fzf-tab init failed"
-
-# fasd 
-# Using a cache file to init faster. 
-# WARN: This init file has some custom modifications.
-# Issues with fasd and fzf integrations. And I want autojumping to integrate with fzf, so 
-# [[ -f ${PLUGINS_DIR}/fasd/fasd ]] && source ${PLUGINS_DIR}/fasd/fasd || echoerr "fasd init failed"
-# [[ -f ${HELPERS_DIR}/fasd-init.zsh ]] && source ${HELPERS_DIR}/fasd-init.zsh || echoerr "fasd-helper init failed"
-# [[ -f ${PLUGINS_DIR}/fzf-fasd/fzf-fasd.plugin.zsh ]] && source ${PLUGINS_DIR}/fzf-fasd/fzf-fasd.plugin.zsh j || echoerr "fzf-fasd init failed"
-
 # z
-# Using z and not fasd because the integration with fzf for z works, but for fasd it doesn't.
 [[ -f ${PLUGINS_DIR}/z/z.sh ]] && source ${PLUGINS_DIR}/z/z.sh || echoerr "z init failed"
 FZ_CMD='j'
 FZ_SUBDIR_CMD='jj'
@@ -152,10 +139,6 @@ FZ_SUBDIR_CMD='jj'
 
 # the fuck
 [[ -f ${HELPERS_DIR}/thefuck.zsh ]] && source ${HELPERS_DIR}/thefuck.zsh || echoerr "the fuck init failed"
-
-# helpers
-# [[ -f ${HELPERS_DIR}/git.zsh ]] && source ${HELPERS_DIR}/git.zsh || echoerr "cannot load git helper"
-# [[ -f ${HELPERS_DIR}/grep.zsh ]] && source ${HELPERS_DIR}/grep.zsh || echoerr "cannot load grep helper"
 
 # aliases
 [[ -f ${HELPERS_DIR}/aliases.zsh ]] && source ${HELPERS_DIR}/aliases.zsh || echoerr "cannot load aliases"
@@ -172,9 +155,6 @@ KC_ITERM_USER_VAR=0
 # installed and manged using nodenv: https://github.com/nodenv/nodenv
 command_exists nodenv && source ${HELPERS_DIR}/nodenv.zsh || ( command_exists nodenv && echoerr "nodenv is installed but helper not found" || echoerr "nodenv not found")
 
-# setup $LSCOLORS
-# export LSCOLORS="Gxfxcxdxbxegedabagacad"
-
 # direnv
 source ${HELPERS_DIR}/direnv.zsh
 
@@ -188,25 +168,12 @@ source ${HELPERS_DIR}/direnv.zsh
 # syntax highlighting
 # NOTE: This needs to be kept at the end of this file.
 ########################################################################################################################
-# [[ -f ${PLUGINS_DIR}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && \
-#                             source ${PLUGINS_DIR}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -f ${PLUGINS_DIR}/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ]] && \
         source ${PLUGINS_DIR}/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh || echoerr "syntax highlighting init failed"
 
 
 ########################################################################################################################
-# Cleanup
-# =======
-# Skipping this for now so that functions using these vars work as expected.
-########################################################################################################################
-# unset BREW_HOME
-# unset PLUGINS_DIR
-# unset HELPERS_DIR
-# unset ZSH_CACHE_DIR
-
-
-########################################################################################################################
-# Everthing in this sections is a part of the default zsh that shipped with MacOS. This has been retained only for
+# Everthing in this sections is a part of the default zsh that ships with MacOS. This has been retained only for
 # reference. Wherever needed, I've copied the relavant portions from below and retained them.
 ########################################################################################################################
 # System-wide profile for interactive zsh(1) shells.
