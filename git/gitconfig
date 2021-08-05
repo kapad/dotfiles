@@ -30,7 +30,7 @@
   pullf="pull --force"
   
   # graph
-  lgsummary = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+  lgs = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 [push]
   default = upstream
@@ -43,19 +43,7 @@
 [credential]
   helper = osxkeychain
 
-# to rewrite all https git clones as ssh
-# Walmart VPN configs don't allow ssh access to github. Therefore, commented out for now. 
-# [url "git@github.com:"]
-#   insteadOf = https://github.com/
-
-# [includeIf "gitdir:~/projects/walmart/"]
-#     path = ~/projects/walmart/.gitconfig
-
-# [includeIf "gitdir:~/projects/ghe/"]
-#     path = ~/projects/ghe/.gitconfig
-
-# [url "git@gecgithub01.walmart.com:"]
-# 	insteadOf = https://gecgithub01.walmart.com/
-
-[include]
+# gec = parent directory for all github enterprise clones.
+# this should only include if this exists.
+[includeIf "gitdir:~/gec/"]
     path = ~/.work_gitconfig
