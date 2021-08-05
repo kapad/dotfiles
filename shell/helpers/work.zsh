@@ -6,4 +6,3 @@
 [[ -f ${WORK_DOTFILES_DIR}/zshrc ]] && source ${WORK_DOTFILES_DIR}/zshrc || echoerr "Work dotfiles not loaded"
 [[ -f ${WORK_DOTFILES_DIR}/aliases.zsh ]] && source ${WORK_DOTFILES_DIR}/aliases.zsh || echoerr "Work dotfiles not loaded"
 [[ -f ${WORK_DOTFILES_DIR}/functions.zsh ]] && source ${WORK_DOTFILES_DIR}/functions.zsh || echoerr "Work dotfiles not loaded"
-[[ -f ${WORK_DOTFILES_DIR}/completions.zsh ]] && source ${WORK_DOTFILES_DIR}/completions.zsh || echoerr "Work dotfiles not loaded"
