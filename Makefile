@@ -37,8 +37,8 @@ mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
 
 completions_dir := /usr/local/share/zsh/site-functions
-plugins_dir := ${HOME}/.plugins
-helpers_dir := ${HOME}/.helpers
+plugins_dir := ${HOME}/.zsh.d/plugins
+helpers_dir := ${HOME}/.zsh.d/helpers
 
 $(call check_defined, HOME, "User's home directory")
 
@@ -68,6 +68,8 @@ link-completion:
 
 .PHONY: link
 link:
+	@mkdir -p ${HOME}/.zsh.d
+	@echo 'Created ${HOME}/.zsh.d'
 	@ln -sf ${current_dir}/shell/zshrc ${HOME}/.zshrc
 	@echo 'Created ${HOME}/.zshrc'
 	@ln -sf ${current_dir}/shell/plugins ${plugins_dir}
@@ -78,17 +80,16 @@ link:
 	@echo 'Created ${HOME}/.gitconfig'
 	@ln -sf ${current_dir}/git/global_gitignore ${HOME}/.global_gitignore
 	@echo 'Created ${HOME}/.global_gitignore'
-# 	@ln -sf ${plugins_dir}/helmenv ${HOME}/.helmenv
-# 	@echo 'Created ${HOME}/.helmenv'
 	@$(MAKE) -s link-completion
 
 .PHONY: unlink
 unlink:
 	@rm -f ${HOME}/.zshrc
-	@rm -f ${HOME}/.plugins
-	@rm -f ${HOME}/.helpers
+	@rm -f ${plugins_dir}
+	@rm -f ${helpers_dir}
 	@rm -f ${HOME}/.gitconfig
 	@rm -f ${HOME}/.global_gitignore
+	@rm -f ${HOME}/bin/cheat
 	@echo "Unlinked all files"
 
 ${HOME}/bin/cheat:
