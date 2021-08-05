@@ -95,7 +95,6 @@ zmodload zsh/complist
 ########################################################################################################################
 # Init
 ########################################################################################################################
-# TODO - keybindings
 
 # work dotfiles. 
 [[ -d ${WORK_DOTFILES_DIR} ]] && source ${HELPERS_DIR}/work.zsh
@@ -153,6 +152,9 @@ command_exists nodenv && source ${HELPERS_DIR}/nodenv.zsh || ( command_exists no
 
 # direnv
 source ${HELPERS_DIR}/direnv.zsh
+
+# keybindings
+[[ -f ${HELPERS_DIR}/keybindings.zsh ]] && source ${HELPERS_DIR}/keybindings.zsh
 
 # powerlevel10k
 [[ -f ${HELPERS_DIR}/powerlevel10k.zsh ]] && source ${HELPERS_DIR}/powerlevel10k.zsh || echoerr "cannot load powerlevel10k"
