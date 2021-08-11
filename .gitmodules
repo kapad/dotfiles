@@ -13,9 +13,6 @@
 [submodule "shell/plugins/fz"]
 	path = shell/plugins/fz
 	url = https://github.com/changyuheng/fz.git
-[submodule "shell/plugins/kc"]
-	path = shell/plugins/kc
-	url = https://github.com/kapad/kc.git
 [submodule "shell/plugins/dircolors-solarized"]
 	path = shell/plugins/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized.git
