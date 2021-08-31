@@ -32,12 +32,19 @@
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
-    # os_icon               # os identifier
+    # os_icon                 # os identifier
     dir                     # current directory
     vcs                     # git status
+    # vcs                     # git status
+    # virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     # =========================[ Line #2 ]=========================
     newline                 # \n
-    # prompt_char           # prompt symbol
+    go_version              # go version (https://golang.org)
+    virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
+    nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
+    kubecontext             # current kubernetes context (https://kubernetes.io/)
+    newline                 # \n
+    prompt_char             # prompt symbol
   )
 
   # The list of segments shown on the right. Fill it with less important segments.
@@ -46,65 +53,63 @@
   # last prompt line gets hidden if it would overlap with left prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
-    status                  # exit code of the last command
-    command_execution_time  # duration of the last command
-    background_jobs         # presence of background jobs
-    direnv                  # direnv status (https://direnv.net/)
-    asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
-    virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
-    anaconda                # conda environment (https://conda.io/)
-    pyenv                   # python environment (https://github.com/pyenv/pyenv)
-    goenv                   # go environment (https://github.com/syndbg/goenv)
-    nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
-    nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
-    nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
+    load                    # CPU load
+    ram                     # free RAM
+    vpn_ip                  # virtual private network indicator
+    proxy                   # system-wide http/https/ftp proxy
+    battery                 # internal battery
+    # =====================[ Line #1 Examples ]=====================
+    # direnv                  # direnv status (https://direnv.net/)
+    # asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
+    # anaconda                # conda environment (https://conda.io/)
+    # pyenv                   # python environment (https://github.com/pyenv/pyenv)
+    # goenv                   # go environment (https://github.com/syndbg/goenv)
+    # nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
+    # nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
     # node_version          # node.js version
-    go_version              # go version (https://golang.org)
     # rust_version          # rustc version (https://www.rust-lang.org)
     # dotnet_version        # .NET version (https://dotnet.microsoft.com)
     # php_version           # php version (https://www.php.net/)
     # laravel_version       # laravel php framework version (https://laravel.com/)
     # java_version          # java version (https://www.java.com/)
     # package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
-    rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
-    rvm                     # ruby version from rvm (https://rvm.io)
-    fvm                     # flutter version management (https://github.com/leoafarias/fvm)
-    luaenv                  # lua version from luaenv (https://github.com/cehoffman/luaenv)
-    jenv                    # java version from jenv (https://github.com/jenv/jenv)
-    plenv                   # perl version from plenv (https://github.com/tokuhirom/plenv)
-    phpenv                  # php version from phpenv (https://github.com/phpenv/phpenv)
-    scalaenv                # scala version from scalaenv (https://github.com/scalaenv/scalaenv)
-    haskell_stack           # haskell version from stack (https://haskellstack.org/)
-    kubecontext             # current kubernetes context (https://kubernetes.io/)
-    terraform               # terraform workspace (https://www.terraform.io)
-    aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
-    aws_eb_env              # aws elastic beanstalk environment (https://aws.amazon.com/elasticbeanstalk/)
-    azure                   # azure account name (https://docs.microsoft.com/en-us/cli/azure)
-    gcloud                  # google cloud cli account and project (https://cloud.google.com/)
-    google_app_cred         # google application credentials (https://cloud.google.com/docs/authentication/production)
-    context                 # user@hostname
-    nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
-    ranger                  # ranger shell (https://github.com/ranger/ranger)
-    nnn                     # nnn shell (https://github.com/jarun/nnn)
-    vim_shell               # vim shell indicator (:sh)
-    midnight_commander      # midnight commander shell (https://midnight-commander.org/)
-    nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
-    vi_mode                 # vi mode (you don't need this if you've enabled prompt_char)
-    # vpn_ip                # virtual private network indicator
-    load                    # CPU load
+    # rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
+    # rvm                     # ruby version from rvm (https://rvm.io)
+    # fvm                     # flutter version management (https://github.com/leoafarias/fvm)
+    # luaenv                  # lua version from luaenv (https://github.com/cehoffman/luaenv)
+    # jenv                    # java version from jenv (https://github.com/jenv/jenv)
+    # plenv                   # perl version from plenv (https://github.com/tokuhirom/plenv)
+    # phpenv                  # php version from phpenv (https://github.com/phpenv/phpenv)
+    # scalaenv                # scala version from scalaenv (https://github.com/scalaenv/scalaenv)
+    # haskell_stack           # haskell version from stack (https://haskellstack.org/)
+    # kubecontext             # current kubernetes context (https://kubernetes.io/)
+    # terraform               # terraform workspace (https://www.terraform.io)
+    # aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
+    # aws_eb_env              # aws elastic beanstalk environment (https://aws.amazon.com/elasticbeanstalk/)
+    # azure                   # azure account name (https://docs.microsoft.com/en-us/cli/azure)
+    # gcloud                  # google cloud cli account and project (https://cloud.google.com/)
+    # google_app_cred         # google application credentials (https://cloud.google.com/docs/authentication/production)
+    # context                 # user@hostname
+    # nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
+    # ranger                  # ranger shell (https://github.com/ranger/ranger)
+    # nnn                     # nnn shell (https://github.com/jarun/nnn)
+    # vim_shell               # vim shell indicator (:sh)
+    # midnight_commander      # midnight commander shell (https://midnight-commander.org/)
+    # nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
+    # vi_mode                 # vi mode (you don't need this if you've enabled prompt_char)
     # disk_usage            # disk usage
-    ram                     # free RAM
     # swap                  # used swap
     # todo                  # todo items (https://github.com/todotxt/todo.txt-cli)
-    battery                 # internal battery
     # timewarrior           # timewarrior tracking status (https://timewarrior.net/)
     # taskwarrior           # taskwarrior task count (https://taskwarrior.org/)
-    time                    # current time
     # =========================[ Line #2 ]=========================
     newline                 # \n
+    status                  # exit code of the last command
+    command_execution_time  # duration of the last command
+    background_jobs         # presence of background jobs
+    time                    # current time
     # ip                    # ip address and bandwidth usage for a specified network interface
     # public_ip             # public IP address
-    # proxy                 # system-wide http/https/ftp proxy
     # wifi                  # wifi speed
     # example               # example user-defined segment (see prompt_example function below)
   )
@@ -133,18 +138,10 @@
 
   # Connect left prompt lines with these symbols. You'll probably want to use the same color
   # as POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_FOREGROUND below.
-  # xyzzy: the below was the default from the theme/init script.
-  # typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='%242F╭─'
-  # typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX='%242F├─'
-  # typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='%242F╰─'
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='%238F\uE0B2'
   typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX='%238F\uE0B2'
-  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='%242F\uf054'
+  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX=''
   # Connect right prompt lines with these symbols.
-  # xyzzy: the below was the default from the theme/init script.
-  # typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_SUFFIX='%242F─╮'
-  # typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_SUFFIX='%242F─┤'
-  # typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX='%242F─╯'
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_SUFFIX='%238F\uE0B0'
   typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_SUFFIX='%238F\uE0B0'
   typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX=''
@@ -154,6 +151,8 @@
   # separate prompt from command output. You might want to set POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
   # for more compact prompt if using using this option.
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR='─'
+  typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_GAP_CHAR='─'
+  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_GAP_CHAR='─'
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_BACKGROUND=
   typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_GAP_BACKGROUND=
   if [[ $POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR != ' ' ]]; then
@@ -164,6 +163,14 @@
     typeset -g POWERLEVEL9K_EMPTY_LINE_LEFT_PROMPT_FIRST_SEGMENT_END_SYMBOL='%{%}'
     # End filler on the edge of the screen if there are no right segments on the first line.
     typeset -g POWERLEVEL9K_EMPTY_LINE_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='%{%}'
+  fi
+
+  if [[ $POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_GAP_CHAR != ' ' ]]; then
+    typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_GAP_FOREGROUND=242
+  fi
+
+  if [[ $POWERLEVEL9K_MULTILINE_LAST_PROMPT_GAP_CHAR != ' ' ]]; then
+    typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_GAP_FOREGROUND=242
   fi
 
   # Default background color.
@@ -399,7 +406,7 @@
     # If local branch name or tag is at most 32 characters long, show it in full.
     # Otherwise show the first 12 … the last 12.
     # Tip: To always show local branch name in full without truncation, delete the next line.
-    (( $#where > 32 )) && where[13,-13]="…"
+    (( $#where > 40 )) && where[14,-25]="…"
 
     res+="${clean}${where//\%/%%}"  # escape %
 
@@ -769,7 +776,7 @@
   # RAM color.
   typeset -g POWERLEVEL9K_RAM_FOREGROUND=66
   # Custom icon.
-  # typeset -g POWERLEVEL9K_RAM_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_RAM_VISUAL_IDENTIFIER_EXPANSION=''
 
   #####################################[ swap: used swap ]######################################
   # Swap color.
@@ -787,7 +794,7 @@
   # Load color when load is over 70%.
   typeset -g POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND=166
   # Custom icon.
-  # typeset -g POWERLEVEL9K_LOAD_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_LOAD_VISUAL_IDENTIFIER_EXPANSION=''
 
   ################[ todo: todo items (https://github.com/todotxt/todo.txt-cli) ]################
   # Todo color.
@@ -1582,7 +1589,7 @@
   #   - verbose: Enable instant prompt and print a warning when detecting console output during
   #              zsh initialization. Choose this if you've never tried instant prompt, haven't
   #              seen the warning, or if you are unsure what this all means.
-  typeset -g POWERLEVEL9K_INSTANT_PROMPT=verbose
+  typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
   # Hot reload allows you to change POWERLEVEL9K options after Powerlevel10k has been initialized.
   # For example, you can type POWERLEVEL9K_BACKGROUND=red and see your prompt turn red. Hot reload
@@ -1603,6 +1610,21 @@ typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 # #################
 # This section consists of custom extensions that I have added to powerlevel10k functionaility.
 #######################################################################################################################
+
+# toggle displaying kubernetes context always and only on relevant commands
+function kube_toggle() {
+  if (( ${+POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND} )); then
+    unset POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND
+  else
+    POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
+  fi
+  p10k reload
+  if zle; then
+    zle push-input
+    zle accept-line
+  fi
+}
+
 zle -N kube_toggle # bind toggle for switch kubernetes context display.
 bindkey '^]' kube_toggle # key binding for kube-toggle
 
