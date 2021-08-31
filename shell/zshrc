@@ -71,6 +71,7 @@ PATH=''
 [[ -d ${BREW_HOME}/opt/coreutils/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/coreutils/libexec/gnubin || echoerr "PATH not configured for coreutils"
 [[ -d ${BREW_HOME}/opt/grep/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/grep/libexec/gnubin || echoerr "PATH not setup for GNU grep"
 [[ -d ${BREW_HOME}/opt/make/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/make/libexec/gnubin || echoerr "PATH not setup for GNU Make"
+[[ -d ${BREW_HOME}/opt/openssl@1.1/bin ]] && pathmunge ${BREW_HOME}/opt/openssl@1.1/bin || echoerr "PATH not setup for GNU openssl@1.1"
 [[ -d ${BREW_HOME}/opt/curl/bin ]] && pathmunge ${BREW_HOME}/opt/curl/bin || echoerr "PATH not setup for GNU curl"
 [[ -d ${BREW_HOME}/opt/gnu-tar/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/gnu-tar/libexec/gnubin || echoerr "PATH not setup for GNU tar"
 [[ -d ${BREW_HOME}/opt/gnu-sed/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/gnu-sed/libexec/gnubin || echoerr "PATH not setup for GNU sed"
@@ -86,7 +87,7 @@ PATH=''
 # additional PATH directories
 [[ -d ${HOME}/go/bin ]] && pathmunge ${HOME}/go/bin || echoerr "PATH not configured for go binaries"
 [[ -d ${HOME}/.krew/bin ]] && pathmunge ${HOME}/.krew/bin || echoerr "PATH not configured for krew"
-# [[ -d ${HOME}/.helmenv/bin ]] && pathmunge ${HOME}/.helmenv/bin || echoerr "PATH not configured for helmenv"
+[[ -d ${HOME}/.bin ]] && pathmunge ${HOME}/.bin || echoerr "PATH not configured for helmenv" # helmenv use ~/.bin to store different helm version binaries.
 
 # modules
 zmodload zsh/complist
@@ -95,9 +96,6 @@ zmodload zsh/complist
 ########################################################################################################################
 # Init
 ########################################################################################################################
-
-# work dotfiles. 
-[[ -d ${WORK_DOTFILES_DIR} ]] && source ${HELPERS_DIR}/work.zsh
 
 # dircolors
 # solarized dircolors for ls
@@ -112,10 +110,14 @@ autoload -U -z compinit
 compinit -C -d ${ZSH_CACHE_DIR}/.zcompdump
 [[ -f ${HELPERS_DIR}/completion.zsh ]] && source ${HELPERS_DIR}/completion.zsh || echoerr "unable to load completion helper"
 
-# command-not-found
-HB_CNF_HANDLER="${BREW_HOME}/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
-[[ -f ${HB_CNF_HANDLER} ]] && source ${HB_CNF_HANDLER} || echoerr "command-not-found init failed"
-unset HB_CNF_HANDLER
+# keybindings
+[[ -f ${HELPERS_DIR}/keybindings.zsh ]] && source ${HELPERS_DIR}/keybindings.zsh
+
+# Terrible performance
+# # command-not-found
+# HB_CNF_HANDLER="${BREW_HOME}/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+# [[ -f ${HB_CNF_HANDLER} ]] && source ${HB_CNF_HANDLER} || echoerr "command-not-found init failed"
+# unset HB_CNF_HANDLER
 
 # fzf
 [[ -f ${HELPERS_DIR}/fzf.zsh ]] && source ${HELPERS_DIR}/fzf.zsh || echoerr "fzf init failed"
@@ -127,21 +129,13 @@ unset HB_CNF_HANDLER
 [[ -f ${PLUGINS_DIR}/z/z.sh ]] && source ${PLUGINS_DIR}/z/z.sh || echoerr "z init failed"
 FZ_CMD='j'
 FZ_SUBDIR_CMD='jj'
-[[ -f ${PLUGINS_DIR}/fz/fz.sh ]] && source ${PLUGINS_DIR}/fz/fz.sh || echoerr "fz init failed"
+[[ -f ${PLUGINS_DIR}/fz/fz.plugin.zsh ]] && source ${PLUGINS_DIR}/fz/fz.plugin.zsh || echoerr "fz init failed"
 
 # zsh autosuggestions
 [[ -f ${PLUGINS_DIR}/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source ${PLUGINS_DIR}/zsh-autosuggestions/zsh-autosuggestions.zsh || echoerr "zsh-autosuggestions init failed"
 
-# the fuck
-[[ -f ${HELPERS_DIR}/thefuck.zsh ]] && source ${HELPERS_DIR}/thefuck.zsh || echoerr "the fuck init failed"
-
-# aliases
-[[ -f ${HELPERS_DIR}/aliases.zsh ]] && source ${HELPERS_DIR}/aliases.zsh || echoerr "cannot load aliases"
-
-# k8s
-KC_KUBE_PS1_TOGGLE=0
-KC_ITERM_USER_VAR=0
-[[ -f ${PLUGINS_DIR}/kc/kc-init.sh ]] && source ${PLUGINS_DIR}/kc/kc-init.sh || echoerr "kc init failed"
+# k8s - aliases and functions for k8s
+[[ -f ${HELPERS_DIR}/kubernetes.zsh ]] && source ${HELPERS_DIR}/kubernetes.zsh || echoerr "kubernetes init failed"
 
 # python
 [[ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]] && source /usr/local/bin/virtualenvwrapper_lazy.sh || echoerr "virtualenvwrapper not found"
@@ -151,16 +145,23 @@ KC_ITERM_USER_VAR=0
 command_exists nodenv && source ${HELPERS_DIR}/nodenv.zsh || ( command_exists nodenv && echoerr "nodenv is installed but helper not found" || echoerr "nodenv not found")
 
 # direnv
-source ${HELPERS_DIR}/direnv.zsh
-
-# keybindings
-[[ -f ${HELPERS_DIR}/keybindings.zsh ]] && source ${HELPERS_DIR}/keybindings.zsh
+# TODO workout the kinks
+# source ${HELPERS_DIR}/direnv.zsh
 
 # powerlevel10k
 [[ -f ${HELPERS_DIR}/powerlevel10k.zsh ]] && source ${HELPERS_DIR}/powerlevel10k.zsh || echoerr "cannot load powerlevel10k"
 [[ -f ${PLUGINS_DIR}/powerlevel10k/powerlevel10k.zsh-theme ]] && source ${PLUGINS_DIR}/powerlevel10k/powerlevel10k.zsh-theme || echoerr 'powerlevel10k init failed'
 # To customize prompt, edit helpers/powerlevel10k.zsh
 
+# aliases
+[[ -f ${HELPERS_DIR}/aliases.zsh ]] && source ${HELPERS_DIR}/aliases.zsh || echoerr "cannot load aliases"
+
+########################################################################################################################
+# Work dotfiles - error if the directory exists but file doesn't
+########################################################################################################################
+if [[ -d ${WORK_DOTFILES_DIR} ]]; then
+    [[ -f ${WORK_DOTFILES_DIR}/zshrc ]] && source ${WORK_DOTFILES_DIR}/zshrc || echoerr "Work dotfiles not loaded"
+fi
 
 ########################################################################################################################
 # syntax highlighting
