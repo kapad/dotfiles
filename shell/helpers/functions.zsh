@@ -30,18 +30,10 @@ pathmunge () {
 # https://stackoverflow.com/a/62235327/1365918
 echoerr() { printf "\e[31;1m%s\e[0m\n" "$*" >&2; }
 
-# delete the zcompdump file so that it's automatically regenerated the next time it's needed.
-zcomp_reset() {
-    rm -f ${ZSH_CACHE_DIR}/.zcompdump
-}
-
 # deletes all the files in $HOME/.zsh_cache - which is the zsh cache directory.
-zsh_cache_reset() {
- rm -rf ${HOME}/.zsh_cache/*
-}
-
-# deletes all the files in $HOME/.zsh_cache - which is the zsh cache directory.
-p10k_cache_reset() {
+zshcachereset() {
+ rm -rf ${HOME}/.zsh_cache
+ mkdir -p ${HOME}/.zsh_cache
  rm -rf ${HOME}/.cache/p10k*
 }
 
@@ -69,20 +61,6 @@ function open_command() {
 # get a table with all supported terminal colors and their numbers.
 function color_table() {
     for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
-}
-
-# toggle displaying kubernetes context always and only on relevant commands
-function kube_toggle() {
-  if (( ${+POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND} )); then
-    unset POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND
-  else
-    POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
-  fi
-  p10k reload
-  if zle; then
-    zle push-input
-    zle accept-line
-  fi
 }
 
 function command_exists() {
@@ -175,7 +153,7 @@ zmodload zsh/langinfo
 #    -m causes "mark" characters (_.!~*''()-) to be escaped
 #
 #    -P causes spaces to be encoded as '%20' instead of '+'
-function omz_urlencode() {
+function urlencode() {
   emulate -L zsh
   zparseopts -D -E -a opts r m P
 
@@ -245,7 +223,7 @@ function omz_urlencode() {
 #
 # Usage:
 #   omz_urldecode <urlstring>  - prints decoded string followed by a newline
-function omz_urldecode {
+function urldecode {
   emulate -L zsh
   local encoded_url=$1
 

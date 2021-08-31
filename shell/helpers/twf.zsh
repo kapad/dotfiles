@@ -12,6 +12,3 @@ twf-widget() {
 
 zle -N twf-widget
 bindkey '^P' twf-widget
-
-
-#fzf --height=50% --reverse --margin 3% --bind 'f1:execute(less -f {}),ctrl-y:execute-silent(echo {} | pbcopy)+abort'
