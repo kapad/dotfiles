@@ -42,7 +42,7 @@ function __kc_temp() {
   fi
 
   local NEW_KUBECONFIG=$(mktemp)
-  kubectl config view --minify --flatten --context=${CLUSTER} > ${NEW_KUBECONFIG}
+  kubectl config view --minify --flatten --context=${CLUSTER} > ${NEW_KUBECONFIG} 2>/dev/null
   ret=$?
   if [[ $ret -ne 0 ]]; then
     return $ret
