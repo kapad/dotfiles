@@ -49,4 +49,6 @@ alias v=pbpaste
 # alias grep='grep --color'
 # alias egrep='egrep --color'
 alias -g E2OUT='2>&1'
+alias -g E2NULL='2>/dev/null'
 alias yqc='yq -PC e -'
+alias cdt='cd ~/tmp'
