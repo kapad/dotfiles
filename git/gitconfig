@@ -24,6 +24,7 @@
   a="add"
   fo="fetch origin"
   fop="fetch origin --prune"
+  fmp="fetch mainline --prune"
   pushup="!git push --set-upstream origin $(git symbolic-ref --short HEAD)"
   pushf="push --force"
   pushd="push --delete"

@@ -16,7 +16,7 @@ alias mv='mv -i'
 # utils
 alias dud='du -d 1 -h' # disk utilization for all directories
 alias duf='du -sh *' # disk utilization for all files and directories
-alias findd='find . -type d -iname' # find file by name (case-insensitive)
+alias findd='find . -type d -iname' # find file by name (case insensitive)
 alias findf='find . -type f -iname' # find directory by name (case insensitive)
 
 # grep, egrep and fgrep
