@@ -5,6 +5,7 @@
 [user]
   name = Rohan Kapadia
   email = rohankapadia@gmail.com
+	signingkey = 1BB6C89B4C567613
 
 # what the hell is the difference between the author and the user??
 
@@ -24,8 +25,10 @@
   a="add"
   fo="fetch origin"
   fop="fetch origin --prune"
+  ffp="fetch fork --prune"
   fmp="fetch mainline --prune"
-  pushup="!git push --set-upstream origin $(git symbolic-ref --short HEAD)"
+  pushup="!git push --set-upstream origin $(git symbolic-ref --short HEAD):$(git symbolic-ref --short HEAD)"
+  forkpushup="!git push --set-upstream fork $(git symbolic-ref --short HEAD):$(git symbolic-ref --short HEAD)"
   pushf="push --force"
   pushd="push --delete"
   pullf="pull --force"
@@ -48,3 +51,6 @@
 # this should only include if this exists.
 [includeIf "gitdir:~/gec/"]
     path = ~/.work_gitconfig
+
+[diff]
+    submodule="log"

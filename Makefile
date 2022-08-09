@@ -1,21 +1,13 @@
-.DEFAULT_GOAL:=help
+# From https://tech.davis-hansson.com/p/make/
+ifeq ($(origin .RECIPEPREFIX), undefined)
+  $(error This Make does not support .RECIPEPREFIX. Please use GNU Make 4.0 or later)
+endif
+.RECIPEPREFIX = >
 
-.PHONY: help
-help:
-	@echo
-	@echo '#############################'
-	@echo '#### dotfiles - by kapad ####'
-	@echo '#############################'
-	@echo 
-	@echo 'Usage: '
-	@echo 
-	@echo 'make: Display this help message'
-	@echo 'make help: Display this help message'
-	@echo 'make install: Install these dotfiles and their required dependencies - INCOMPLETE'
-	@echo 'make link: Create symlinks for all dotfiles and point them to their respective targets in this folder'
-	@echo 'make unlink: Delete all symlinks created by "make link"'
-	@echo
-	@echo
+# this will be the abs path to this Makefile
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+# this will be the pwd for the Makefile
+current_dir := $(patsubst %/,%,$(dir $(mkfile_path)))
 
 # Check that given variables are set and all have non-empty values,
 # die with an error otherwise.
@@ -31,10 +23,23 @@ __check_defined = \
 	$(if $(value $1),, \
 	$(error Undefined $1$(if $2, ($2))))
 
-# this will be the abs path to this Makefile
-mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
-# this will be the pwd for the Makefile
-current_dir := $(patsubst %/,%,$(dir $(mkfile_path)))
+.DEFAULT_GOAL:=help
+
+.PHONY: help
+help:
+> @echo
+> @echo '#############################'
+> @echo '#### dotfiles - by kapad ####'
+> @echo '#############################'
+> @echo 
+> @echo 'Usage: '
+> @echo 
+> @echo 'make: Display this help message'
+> @echo 'make help: Display this help message'
+> @echo 'make install: Install these dotfiles and their required dependencies - INCOMPLETE'
+> @echo 'make link: Create symlinks for all dotfiles and point them to their respective targets in this folder'
+> @echo 'make unlink: Delete all symlinks created by "make link"'
+> @echo
 
 completions_dir := /usr/local/share/zsh/site-functions
 zshd := ${HOME}/.zsh.d

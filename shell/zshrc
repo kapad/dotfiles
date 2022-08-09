@@ -41,6 +41,14 @@ HISTFILE=${HOME}/.zsh_history # This is the default. explicit > implicit.
 HISTSIZE=10000 # Set much larger than SAVEHIST
 SAVEHIST=2000 # Size of histoy per session. Does it matter because SHARE_HISTORY has already been set.
 
+# OS
+__OS_TYPE="${OSTYPE}"
+if [[ "${__OS_TYPE}" == "linux-gnu"* ]]; then
+    __OS_TYPE="linux"
+elif [[ "${__OS_TYPE}" == "darwin"* ]]; then
+    __OS_TYPE="macos"
+fi
+
 # EDITOR
 export EDITOR="vim"
 export KUBE_EDITOR="vim"
@@ -59,10 +67,10 @@ export WORK_DOTFILES_DIR=${HOME}/.work.zsh.d
 [[ -f ${HELPERS_DIR}/functions.zsh ]] && source ${HELPERS_DIR}/functions.zsh || printf "\e[31;1m%s\e[0m\n" "unable to load functions" >&2
 
 # Setup PATH
-# Always prefer binaries managed by brew to binaries managed by Apple.
+# Always prefer binaries managed by homebrew to binaries managed by Apple.
 # `pathmunge <path>` will add <path> to the end of $PATH.
 # `pathmunge <path> before` will add <path> to the start of $PATH. Use sparingly.
-# TODO: Separate this out for root and non root. For root, it's better to use Apple's binaries (if available).
+
 # Reset PATH
 PATH=''
 # Add to PATH. 
@@ -77,13 +85,14 @@ PATH=''
 [[ -d ${BREW_HOME}/opt/gnu-sed/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/gnu-sed/libexec/gnubin || echoerr "PATH not setup for GNU sed"
 [[ -d ${BREW_HOME}/opt/findutils/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/findutils/libexec/gnubin || echoerr "PATH not setup for GNU findutils"
 [[ -d ${BREW_HOME}/opt/gnu-indent/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/gnu-indent/libexec/gnubin || echoerr "PATH not setup for GNU indent"
-[[ -d ${BREW_HOME}/opt/make/libexec/gnubin ]] && pathmunge ${BREW_HOME}/opt/make/libexec/gnubin || echoerr "PATH not setup for GNU Make"
 [[ -d ${BREW_HOME}/opt/python/libexec/bin ]] && pathmunge ${BREW_HOME}/opt/python/libexec/bin || echoerr "PATH not configured for python@3.x"
 # MacOS defaults
-[[ -d /usr/bin ]] && pathmunge /usr/bin || echoerr "PATH not configured for /usr/bin"
-[[ -d /bin ]] && pathmunge /bin || echoerr "PATH not configured for /bin"
-[[ -d /usr/sbin ]] && pathmunge /usr/sbin || echoerr "PATH not configured for /usr/sbin"
-[[ -d /sbin ]] && pathmunge /sbin || echoerr "PATH not configured for /sbin"
+if [[ ${__OS_TYPE} == "macos" ]]; then
+    [[ -d /usr/bin ]] && pathmunge /usr/bin || echoerr "PATH not configured for /usr/bin"
+    [[ -d /bin ]] && pathmunge /bin || echoerr "PATH not configured for /bin"
+    [[ -d /usr/sbin ]] && pathmunge /usr/sbin || echoerr "PATH not configured for /usr/sbin"
+    [[ -d /sbin ]] && pathmunge /sbin || echoerr "PATH not configured for /sbin"
+fi
 # additional PATH directories
 [[ -d ${HOME}/go/bin ]] && pathmunge ${HOME}/go/bin || echoerr "PATH not configured for go binaries"
 [[ -d ${HOME}/.krew/bin ]] && pathmunge ${HOME}/.krew/bin || echoerr "PATH not configured for krew"
@@ -112,12 +121,6 @@ compinit -C -d ${ZSH_CACHE_DIR}/.zcompdump
 
 # keybindings
 [[ -f ${HELPERS_DIR}/keybindings.zsh ]] && source ${HELPERS_DIR}/keybindings.zsh
-
-# Terrible performance
-# # command-not-found
-# HB_CNF_HANDLER="${BREW_HOME}/Homebrew/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
-# [[ -f ${HB_CNF_HANDLER} ]] && source ${HB_CNF_HANDLER} || echoerr "command-not-found init failed"
-# unset HB_CNF_HANDLER
 
 # fzf
 [[ -f ${HELPERS_DIR}/fzf.zsh ]] && source ${HELPERS_DIR}/fzf.zsh || echoerr "fzf init failed"
@@ -153,6 +156,9 @@ command_exists nodenv && source ${HELPERS_DIR}/nodenv.zsh || ( command_exists no
 [[ -f ${PLUGINS_DIR}/powerlevel10k/powerlevel10k.zsh-theme ]] && source ${PLUGINS_DIR}/powerlevel10k/powerlevel10k.zsh-theme || echoerr 'powerlevel10k init failed'
 # To customize prompt, edit helpers/powerlevel10k.zsh
 
+# display helper
+[[ -f ${HELPERS_DIR}/displays.zsh ]] && source ${HELPERS_DIR}/displays.zsh || echoerr "cannot load displays"
+
 # aliases
 [[ -f ${HELPERS_DIR}/aliases.zsh ]] && source ${HELPERS_DIR}/aliases.zsh || echoerr "cannot load aliases"
 
@@ -169,82 +175,3 @@ fi
 ########################################################################################################################
 [[ -f ${PLUGINS_DIR}/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ]] && \
         source ${PLUGINS_DIR}/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh || echoerr "syntax highlighting init failed"
-
-
-########################################################################################################################
-# Everthing in this sections is a part of the default zsh that ships with MacOS. This has been retained only for
-# reference. Wherever needed, I've copied the relavant portions from below and retained them.
-########################################################################################################################
-# System-wide profile for interactive zsh(1) shells.
-
-# Setup user specific overrides for this in ~/.zshrc. See zshbuiltins(1)
-# and zshoptions(1) for more details.
-
-# Correctly display UTF-8 with combining characters.
-# if [[ "$(locale LC_CTYPE)" == "UTF-8" ]]; then
-#     setopt COMBINING_CHARS
-# fi
-
-# Disable the log builtin, so we don't conflict with /usr/bin/log
-# disable log
-
-# Save command history
-# HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
-# HISTSIZE=2000
-# SAVEHIST=1000
-
-# Beep on error
-# setopt BEEP
-
-# Use keycodes (generated via zkbd) if present, otherwise fallback on
-# values from terminfo
-# if [[ -r ${ZDOTDIR:-$HOME}/.zkbd/${TERM}-${VENDOR} ]] ; then
-#     source ${ZDOTDIR:-$HOME}/.zkbd/${TERM}-${VENDOR}
-# else
-#     typeset -g -A key
-
-#     [[ -n "$terminfo[kf1]" ]] && key[F1]=$terminfo[kf1]
-#     [[ -n "$terminfo[kf2]" ]] && key[F2]=$terminfo[kf2]
-#     [[ -n "$terminfo[kf3]" ]] && key[F3]=$terminfo[kf3]
-#     [[ -n "$terminfo[kf4]" ]] && key[F4]=$terminfo[kf4]
-#     [[ -n "$terminfo[kf5]" ]] && key[F5]=$terminfo[kf5]
-#     [[ -n "$terminfo[kf6]" ]] && key[F6]=$terminfo[kf6]
-#     [[ -n "$terminfo[kf7]" ]] && key[F7]=$terminfo[kf7]
-#     [[ -n "$terminfo[kf8]" ]] && key[F8]=$terminfo[kf8]
-#     [[ -n "$terminfo[kf9]" ]] && key[F9]=$terminfo[kf9]
-#     [[ -n "$terminfo[kf10]" ]] && key[F10]=$terminfo[kf10]
-#     [[ -n "$terminfo[kf11]" ]] && key[F11]=$terminfo[kf11]
-#     [[ -n "$terminfo[kf12]" ]] && key[F12]=$terminfo[kf12]
-#     [[ -n "$terminfo[kf13]" ]] && key[F13]=$terminfo[kf13]
-#     [[ -n "$terminfo[kf14]" ]] && key[F14]=$terminfo[kf14]
-#     [[ -n "$terminfo[kf15]" ]] && key[F15]=$terminfo[kf15]
-#     [[ -n "$terminfo[kf16]" ]] && key[F16]=$terminfo[kf16]
-#     [[ -n "$terminfo[kf17]" ]] && key[F17]=$terminfo[kf17]
-#     [[ -n "$terminfo[kf18]" ]] && key[F18]=$terminfo[kf18]
-#     [[ -n "$terminfo[kf19]" ]] && key[F19]=$terminfo[kf19]
-#     [[ -n "$terminfo[kf20]" ]] && key[F20]=$terminfo[kf20]
-#     [[ -n "$terminfo[kbs]" ]] && key[Backspace]=$terminfo[kbs]
-#     [[ -n "$terminfo[kich1]" ]] && key[Insert]=$terminfo[kich1]
-#     [[ -n "$terminfo[kdch1]" ]] && key[Delete]=$terminfo[kdch1]
-#     [[ -n "$terminfo[khome]" ]] && key[Home]=$terminfo[khome]
-#     [[ -n "$terminfo[kend]" ]] && key[End]=$terminfo[kend]
-#     [[ -n "$terminfo[kpp]" ]] && key[PageUp]=$terminfo[kpp]
-#     [[ -n "$terminfo[knp]" ]] && key[PageDown]=$terminfo[knp]
-#     [[ -n "$terminfo[kcuu1]" ]] && key[Up]=$terminfo[kcuu1]
-#     [[ -n "$terminfo[kcub1]" ]] && key[Left]=$terminfo[kcub1]
-#     [[ -n "$terminfo[kcud1]" ]] && key[Down]=$terminfo[kcud1]
-#     [[ -n "$terminfo[kcuf1]" ]] && key[Right]=$terminfo[kcuf1]
-# fi
-
-# Default key bindings
-# [[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
-# [[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
-# [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
-# [[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
-# [[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
-
-# Default prompt
-# PS1="%n@%m %1~ %# "
-
-# Useful support for interacting with Terminal.app or other terminal programs
-# [ -r "/etc/zshrc_$TERM_PROGRAM" ] && . "/etc/zshrc_$TERM_PROGRAM"
