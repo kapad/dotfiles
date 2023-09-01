@@ -141,6 +141,7 @@ FZ_SUBDIR_CMD='jj'
 [[ -f ${HELPERS_DIR}/kubernetes.zsh ]] && source ${HELPERS_DIR}/kubernetes.zsh || echoerr "kubernetes init failed"
 
 # python
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 [[ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]] && source /usr/local/bin/virtualenvwrapper_lazy.sh || echoerr "virtualenvwrapper not found"
 
 # node

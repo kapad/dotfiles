@@ -1,5 +1,7 @@
+# custom
 tmp/*
 
+# source: https://raw.githubusercontent.com/github/gitignore/main/Global/VisualStudioCode.gitignore
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -10,7 +12,10 @@ tmp/*
 # Local History for Visual Studio Code
 .history/
 
+# Built Visual Studio Code Extensions
+*.vsix
 
+# source: 
 # Cache files for Sublime Text
 *.tmlanguage.cache
 *.tmPreferences.cache

@@ -42,6 +42,8 @@
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
     kubecontext             # current kubernetes context (https://kubernetes.io/)
+    # =========================[ Line #3 ]=========================
+    newline
     prompt_char             # prompt symbol
   )
 
@@ -161,7 +163,7 @@
   # Connect right prompt lines with these symbols.
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_SUFFIX='%238F\uE0B0'
   typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_SUFFIX='%238F\uE0B0'
-  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX='%238F\uE0B0'
+  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX=''
 
   # Filler between left and right prompt on the first prompt line. You can set it to ' ', '·' or
   # '─'. The last two make it easier to see the alignment between left and right prompt and to
@@ -1285,7 +1287,7 @@
   #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
   # Show kubecontext only when the command you are typing invokes one of these tools.
   # Tip: Remove the next line to always show kubecontext.
-  typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile|flux|fluxctl|stern|kubeseal|skaffold|kubent|kubecolor|cmctl|sparkctl'
+  # typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile|flux|fluxctl|stern|kubeseal|skaffold|kubent|kubecolor|cmctl|sparkctl'
 
   # Kubernetes context classes for the purpose of using different colors, icons and expansions with
   # different contexts.
@@ -1319,6 +1321,7 @@
       '*ndp*'   PROD
       # '*test*'  TEST
       '*'       DEFAULT)
+  typeset -g POWERLEVEL9K_KUBECONTEXT_PROD_FOREGROUND=196
   typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=134
   # typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
@@ -1591,7 +1594,7 @@
   # Show battery in yellow when it's discharging.
   typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=178
   # Battery pictograms going from low to high level of charge.
-  typeset -g POWERLEVEL9K_BATTERY_STAGES='\uf58d\uf579\uf57a\uf57b\uf57c\uf57d\uf57e\uf57f\uf580\uf581\uf578'
+  typeset -g POWERLEVEL9K_BATTERY_STAGES=('%K{232}▁' '%K{232}▂' '%K{232}▃' '%K{232}▄' '%K{232}▅' '%K{232}▆' '%K{232}▇' '%K{232}█')
   # Don't show the remaining time to charge/discharge.
   typeset -g POWERLEVEL9K_BATTERY_VERBOSE=false
 
@@ -1702,25 +1705,25 @@
 # Tell `p10k configure` which file it should overwrite.
 typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 
-#######################################################################################################################
-# Custom extensions
-# #################
-# This section consists of custom extensions that I have added to powerlevel10k functionaility.
-#######################################################################################################################
+# #######################################################################################################################
+# # Custom extensions
+# # #################
+# # This section consists of custom extensions that I have added to powerlevel10k functionaility.
+# #######################################################################################################################
 
-# toggle displaying kubernetes context always and only on relevant commands
-function kube_toggle() {
-  if (( ${+POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND} )); then
-    unset POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND
-  else
-    POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
-  fi
-  p10k reload
-  if zle; then
-    zle push-input
-    zle accept-line
-  fi
-}
+# # toggle displaying kubernetes context always and only on relevant commands
+# function kube_toggle() {
+#   if (( ${+POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND} )); then
+#     unset POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND
+#   else
+#     POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
+#   fi
+#   p10k reload
+#   if zle; then
+#     zle push-input
+#     zle accept-line
+#   fi
+# }
 
 zle -N kube_toggle # bind toggle for switch kubernetes context display.
 bindkey '^]' kube_toggle # key binding for kube-toggle

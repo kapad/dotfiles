@@ -27,6 +27,7 @@
   fop="fetch origin --prune"
   ffp="fetch fork --prune"
   fmp="fetch mainline --prune"
+  fbp="fetch base --prune"
   pushup="!git push --set-upstream origin $(git symbolic-ref --short HEAD):$(git symbolic-ref --short HEAD)"
   forkpushup="!git push --set-upstream fork $(git symbolic-ref --short HEAD):$(git symbolic-ref --short HEAD)"
   pushf="push --force"
@@ -54,3 +55,6 @@
 
 [diff]
     submodule="log"
+
+#[url "git@github.com:"]
+#	insteadOf = https://github.com/
